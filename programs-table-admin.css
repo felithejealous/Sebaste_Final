@@ -1,0 +1,43 @@
+/* NEW: Specific column width adjustments for Programs Table */
+        #programsTable th:nth-child(1),
+        #programsTable td:nth-child(1) {
+            width: 15%; /* Image */
+            text-align: center;
+        }
+        #programsTable th:nth-child(2),
+        #programsTable td:nth-child(2) {
+            width: 20%; /* Program Title */
+            white-space: normal;
+        }
+        #programsTable th:nth-child(3),
+        #programsTable td:nth-child(3) {
+            width: 15%; /* Schedule */
+            white-space: nowrap;
+        }
+        #programsTable th:nth-child(4),
+        #programsTable td:nth-child(4) {
+            width: 30%; /* Description */
+            white-space: normal;
+            word-break: break-word;
+        }
+        #programsTable th:nth-child(5),
+        #programsTable td:nth-child(5) {
+            width: 20%; /* Actions */
+        }
+
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .action-buttons .btn {
+            padding: 8px 12px;
+            font-size: 14px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }

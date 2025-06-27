@@ -1,0 +1,436 @@
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }   
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      color: #333;
+      background-color: #f0f5ff;
+      overflow-x: hidden;
+    }
+
+    /* Background with white filter */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    /* ===== NAVBAR STYLES ===== */
+    .navbar-container {
+      background-color: white;
+      width: 100%;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .navbar-container header {
+      height: 90px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .hospital-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      height: 100%;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 60px;
+      overflow: hidden;
+    }
+
+    .logo-container img {
+      max-height: 79px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .hospital-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #0B6A27;
+      text-align: left;
+      line-height: 1.2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hospital-line {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* User info in navbar */
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .user-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background-color: #0B6A27;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .user-name {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .admin-badge {
+      background-color: #0B6A27;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-left: 5px;
+    }
+
+    /* ===== DASHBOARD LAYOUT ===== */
+    .dashboard-container {
+      display: flex;
+      margin-top: 90px; /* Height of navbar */
+      min-height: calc(100vh - 90px);
+    }
+
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background-color: white;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      padding: 30px 0;
+      position: fixed;
+      top: 90px; /* Below navbar */
+      left: 0;
+      height: calc(100vh - 90px);
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 5px;
+    }
+
+    .sidebar-menu a {
+      display: flex;
+      align-items: center;
+      padding: 15px 25px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+    }
+
+    .sidebar-menu a:hover {
+      background-color: rgba(11, 106, 39, 0.1);
+    }
+
+    .sidebar-menu a.active {
+      background-color: rgba(11, 106, 39, 0.15);
+      border-left: 4px solid #0B6A27;
+      color: #0B6A27;
+    }
+
+    .sidebar-menu .icon {
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+    }
+
+    .sidebar-menu .icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Main content area */
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      margin-left: 280px; /* Width of sidebar */
+    }
+
+    .dashboard-header {
+      margin-bottom: 30px;
+    }
+
+    .dashboard-header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    /* Card styles */
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+
+    .card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: #0B6A27;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* Form styles */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #0B6A27;
+    }
+
+    /* Button styles */
+    .btn {
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background-color: #0B6A27;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #094e1d;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #bb2d3b;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+
+    /* Table styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+      color: #333;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    /* Grid layout for forms */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    /* Checkbox styles */
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 10px;
+      width: 18px;
+      height: 18px;
+      accent-color: #0B6A27;
+    }
+     /* Settings Styles */
+    .settings-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .settings-section {
+      background-color: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .settings-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .settings-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+    }
+
+    .settings-title svg {
+      margin-right: 12px;
+      color: #0B6A27;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 80px;
+        padding: 20px 0;
+      }
+
+      .sidebar-menu a {
+        padding: 15px;
+        justify-content: center;
+      }
+
+      .sidebar-menu .icon {
+        margin-right: 0;
+      }
+
+      .sidebar-menu .menu-text {
+        display: none;
+      }
+
+      .main-content {
+        margin-left: 80px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar-container header {
+        padding: 0 20px;
+      }
+
+      .user-name {
+        display: none;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: span 1;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }

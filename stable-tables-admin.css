@@ -1,0 +1,63 @@
+/* ===== TABLE STYLES WITH STABLE LAYOUT ===== */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            table-layout: fixed;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .data-table th {
+            background-color: var(--primary-light);
+            font-weight: 600;
+            color: var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .data-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* Specific column width adjustments for Events Table */
+        #eventsTable th:nth-child(1),
+        #eventsTable td:nth-child(1) {
+            width: 20%;
+            white-space: normal;
+        }
+
+        #eventsTable th:nth-child(2),
+        #eventsTable td:nth-child(2) {
+            width: 15%;
+            white-space: nowrap;
+        }
+
+        #eventsTable th:nth-child(3),
+        #eventsTable td:nth-child(3) {
+            width: 15%;
+            white-space: nowrap;
+        }
+
+        #eventsTable th:nth-child(4),
+        #eventsTable td:nth-child(4) {
+            width: 25%;
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        #eventsTable th:nth-child(5),
+        #eventsTable td:nth-child(5) {
+            width: 25%;
+        }
