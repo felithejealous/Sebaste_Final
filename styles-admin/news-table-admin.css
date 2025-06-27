@@ -1,0 +1,58 @@
+/* Specific column width adjustments for News Table */
+        /* Updated column widths for News table (including image) */
+        #newsTable th:nth-child(1),
+        #newsTable td:nth-child(1) {
+            width: 15%;
+            /* Image */
+            text-align: center;
+        }
+
+        #newsTable th:nth-child(2),
+        #newsTable td:nth-child(2) {
+            width: 20%;
+            /* Article Title */
+            white-space: normal;
+        }
+
+        #newsTable th:nth-child(3),
+        #newsTable td:nth-child(3) {
+            width: 15%;
+            /* Publish Date */
+            white-space: nowrap;
+        }
+
+        #newsTable th:nth-child(4),
+        #newsTable td:nth-child(4) {
+            width: 30%;
+            /* Content */
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        #newsTable th:nth-child(5),
+        #newsTable td:nth-child(5) {
+            width: 20%;
+            /* Actions */
+        }
+
+        /* Image thumbnail in table */
+        .news-thumbnail, .program-thumbnail {
+            width: 60px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+            vertical-align: middle;
+        }
+
+        .news-thumbnail.placeholder, .program-thumbnail.placeholder {
+            background-color: #e0e0e0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 10px;
+            text-align: center;
+            line-height: 1.2;
+            overflow: hidden;
+            border: 1px solid #ccc;
+        }

@@ -1,0 +1,20 @@
+ /* Specific column width adjustments for News Clippings Table */
+        #newsClippingsTable th:nth-child(1),
+        #newsClippingsTable td:nth-child(1) {
+            width: 30%; /* Title */
+            white-space: normal;
+        }
+        #newsClippingsTable th:nth-child(2),
+        #newsClippingsTable td:nth-child(2) {
+            width: 15%; /* Publish Date */
+            white-space: nowrap;
+        }
+        #newsClippingsTable th:nth-child(3),
+        #newsClippingsTable td:nth-child(3) {
+            width: 35%; /* URL */
+            word-break: break-all; /* Allow breaking long URLs */
+        }
+        #newsClippingsTable th:nth-child(4),
+        #newsClippingsTable td:nth-child(4) {
+            width: 20%; /* Actions */
+        }
