@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - Sebaste Community Hospital</title>
+  <link rel="stylesheet" href="used.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@500;600;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }   
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-color: #D7EEDE;
+      color: #333;
+    }
+
+    /* ===== NAVBAR STYLES ===== */
+    .navbar-container {
+      background-color: white;
+      width: 100%;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1000;
+    }
+
+    .navbar-container header {
+      height: 90px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .hospital-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      height: 100%;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 60px;
+      overflow: hidden;
+    }
+
+    .logo-container img {
+      max-height: 79px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .hospital-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #0B6A27;
+      text-align: left;
+      line-height: 1.2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hospital-line {
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      color: #333333;
+      padding: 8px 16px;
+      border-radius: 10px;
+      transition: 0.3s ease-in-out;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      background-color: rgba(11, 106, 39, 0.2);
+    }
+
+    nav a:active,
+    nav a.active {
+      background-color: #0B6A27;
+      color: white;
+    }
+
+    /* Hero Section */
+    .photo-background-container {
+      background-color: #D7EEDE;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    .background-container {
+      position: relative;
+      background-image: url('bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 650px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .background-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: inherit;
+      background-size: inherit;
+      background-position: inherit;
+      background-repeat: inherit;
+      filter: blur(2px);
+      z-index: 1;
+    }
+
+    .background-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(247, 237, 237, 0.685);
+      z-index: 2;
+    }
+
+    .main-content {
+      position: relative;
+      z-index: 10;
+      padding: 0 20px;
+    }
+
+         .title {
+            font-family: 'Poppins', sans-serif;
+            color: #000000;
+            font-weight: 900;
+            font-size: 50px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8);
+
+            opacity: 0.1;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .title.animate-up{
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    .divider {
+      background-color: #0C634E;
+      width: 100%;
+      height: 80px;
+      margin-bottom: 20px;
+      margin-top: 0px;
+    }
+
+    .content {
+      max-width: 100%;
+      margin: 6rem auto;
+      padding: 0 2rem;
+      font-weight: 600;
+      font-size: 20px;
+      background-color: #D7EEDE;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .contact-wrapper {
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .contact-wrapper h2 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      font-weight: bold;
+      color: #1e1e1e;
+    }
+
+    .contact-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .contact-form {
+      flex: 1 1 550px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .full-width {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    input, textarea {
+      padding: 10px;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      background-color: #0f5c4d;
+      color: #fff;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0a4a3d;
+    }
+
+    .consent-text {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .contact-info-boxes {
+      flex: 1 1 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-box {
+      background-color: #ffffff;
+      padding: 20px;
+      border: 1px solid #000;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .info-box:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .info-box h4 {
+      color: #0B6A27;
+      margin-bottom: 10px;
+    }
+
+    .info-box p {
+      margin: 5px 0;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .info-box a {
+      color: #0B6A27;
+      text-decoration: underline;
+    }
+
+         /* New styles for the dropdown */
+    .dropdown {
+        position: relative; /* This is crucial: makes dropdown-content position relative to this */
+        display: flex; /* Allows other nav items to flow next to it */
+        align-items: center;
+    }
+
+    .dropdown-content {
+        display: none; /* Hidden by default */
+        position: absolute; /* Positioned relative to .dropdown */
+        background-color: #f9f9f9; /* Background color for the dropdown menu */
+        min-width: 220px; /* Minimum width for the dropdown menu */
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Shadow for depth */
+        z-index: 1001; /* Ensure it's above other content, including the navbar itself if needed */
+        border-radius: 8px; /* Slightly rounded corners */
+        overflow: hidden; /* Ensures content stays within bounds */
+        top: 100%; /* Position right below the parent link */
+        left: 0; /* Align with the left edge of the parent link */
+        padding: 10px 0; /* Padding inside the dropdown */
+    }
+
+    .dropdown-content a {
+        color: #333; /* Text color for dropdown items */
+        padding: 12px 16px; /* Padding for each item */
+        text-decoration: none;
+        display: block; /* Make links take full width of dropdown */
+        text-align: left; /* Align text to the left */
+        font-weight: 600; /* Slightly less bold than main nav */
+        border-radius: 0; /* No individual border radius for dropdown items */
+    }
+
+    .dropdown-content a:hover {
+        background-color: #e2e2e2; /* Hover background for dropdown items */
+        color: #0B6A27; /* Change text color on hover */
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block; /* Show the dropdown content on hover */
+    }
+
+    /* ===== END NAVBAR STYLES ===== */
+
+    /* Footer */
+    footer {
+      background-color: #0C634E;
+      color: white;
+      padding: 40px 20px 20px 20px;
+      width: 100%;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .footer-logo-container {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 120px;
+      height: auto;
+      z-index: 10;
+    }
+
+    .footer-logo-container img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 60px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-left: 140px;
+    }
+
+    .footer-item {
+      flex: 1;
+      text-align: left;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .footer-item p {
+      margin: 4px 0;
+    }
+
+    .bold {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .copyright {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 11px;
+      padding-left: 140px;
+    }
+
+    /* ===== ELEGANT FADE-IN ANIMATIONS ===== */
+    .fade-in {
+      opacity: 0.1;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      filter: blur(1px);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    .fade-in-delay-1 {
+      transition-delay: 0.2s;
+    }
+
+    .fade-in-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .fade-in-delay-3 {
+      transition-delay: 0.2s;
+    }
+
+    .fade-in-delay-4 {
+      transition-delay: 0.2s;
+    }
+
+    /* Enhanced shadows for polished look */
+    .info-box {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .info-box:hover {
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1366px) {
+      .navbar-container header {
+        padding: 0 20px;
+      }
+      
+      nav {
+        gap: 10px;
+      }
+      
+      nav a {
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar-container header {
+        padding: 0 15px;
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 90px;
+      }
+
+      .hospital-container {
+        flex-wrap: wrap;
+      }
+
+      .hospital-name {
+        font-size: 18px;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      nav a {
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+
+      .title {
+        font-size: 32px;
+      }
+
+      .background-container {
+        height: 450px;
+      }
+
+      .contact-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .contact-wrapper {
+        padding: 20px;
+      }
+
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        padding-left: 20px;
+        gap: 20px;
+      }
+
+      .footer-logo-container {
+        position: static;
+        transform: none;
+        margin-bottom: 20px;
+        width: 80px;
+      }
+
+      .copyright {
+        padding-left: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar-container header {
+        padding: 0 10px;
+      }
+
+      .hospital-name {
+        font-size: 16px;
+      }
+
+      .title {
+        font-size: 28px;
+      }
+
+      .contact-wrapper h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar-container">
+    <header>
+      <div class="hospital-container">
+        <div class="logo-container">
+          <img src="logoright.jpg" alt="Logo Right" />
+        </div>
+        <div class="logo-container">
+          <img src="logoleft.jpg" alt="Logo Left" />
+        </div>
+        <div class="hospital-name">
+          <p class="hospital-line">Sebaste Community</p>
+          <p class="hospital-line">Hospital</p>
+        </div>
+      </div>
+
+   <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="DOCTOR.html">Find Doctors</a>
+        <a href="services.html">Our Services</a>
+        <div class="dropdown">
+          <a href="#" class="dropbtn">News</a>
+          <div class="dropdown-content">
+            <a href="news-advisories.html">Advisories</a>
+            <a href="news-clippings.html">News Clippings</a>
+            <a href="programs.html">Programs</a>
+ 
+
+          </div>
+        </div>
+        <a href="contact.html" class="active">Contact Us</a>
+        <div class="dropdown">
+          <a href="#" class="dropbtn">Resources</a>
+          <div class="dropdown-content">
+            <a href="downloadable.html">Downloadable Forms</a>
+            <a href="healthtips.html">Health Educational Materials and Tips</a>
+            <a href="events-calendar.html">Events Calendar</a>
+             
+          </div>
+        </div>
+        <a href="FAQs.html">FAQs</a>
+    </header>
+    </header>
+  </div>
+
+  <!-- Main Content Container -->
+  <div class="main-container">
+    <!-- Photo Background Container -->
+    <div class="photo-background-container">
+      <div class="background-container">
+        <div class="main-content">
+          <h1 class="title">CONTACT US</h1>
+        </div>
+      </div>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <!-- Contact Section -->
+    <div class="contact-wrapper fade-in">
+      <h2 class="fade-in fade-in-delay-1">Send us a message</h2>
+      <div class="contact-container">
+        <!-- Left Form -->
+        <form class="contact-form fade-in fade-in-delay-2">
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="firstName" required />
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" name="lastName" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Contact Number</label>
+                <input type="text" name="contactNumber" required />
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" required />
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label>Type of inquiry</label>
+              <input type="text" name="inquiryType" required />
+            </div>
+
+            <div class="form-group full-width">
+              <label>Message</label>
+              <textarea rows="5" name="message" required></textarea>
+            </div>
+
+            <p class="consent-text">
+              By clicking "Submit", you are allowing Sebaste Community Hospital to store your personal information and keep in touch with you if necessary.
+            </p>
+
+            <button type="submit">Submit</button>
+          </form>
+
+
+        <!-- Right Info Boxes -->
+        <div class="contact-info-boxes">
+          <div class="info-box fade-in fade-in-delay-3">
+            <h4>Sebaste Community Hospital</h4>
+            <p><strong>Address:</strong> Azucena Extension Poblacion Sebaste, Antique, Sebaste, Philippines</p>
+            <p><strong>Phone:</strong> +63 945 136 7487</p>
+          </div>
+
+          <div class="info-box fade-in fade-in-delay-4">
+            <h4>Sebaste Rural Health Unit</h4>
+            <p><strong>Address:</strong> H3QV+4R6, Iloilo-Antique Rd, Sebaste, Antique</p>
+            <p><strong>Phone:</strong> (036) 278 2077</p>
+          </div>
+
+          <div class="info-box fade-in fade-in-delay-4">
+            <p><strong>Email:</strong> sebastehospital@yahoo.com.ph</p>
+            <p><strong>Facebook:</strong> 
+              <a href="https://www.facebook.com/people/Sebaste-Community-Hospital/100081303807017/" target="_blank">
+                Visit Page
+              </a>
+            </p>
+          </div>
+
+           <!-- NEW: Emergency Hotlines & Directory -->
+          <div class="info-box fade-in fade-in-delay-5">
+            <h4 style="color: #c0392b;">Emergency Hotlines & Directory</h4> <!-- Using inline style for red heading as in previous request -->
+            
+            <p class="bold">HOSPITALS NEAR SEBASTE COMMUNITY HOSPUTAL:</p>
+            <p>
+            
+              <li>Culasi District Hospital:</strong> <a href="tel:09661678858">0966 167 8858</a></li>
+              <li>Ramon Maza Sr. Memorial District Hospital: <a href="tel:09173017095">0917 301 7095</a></li>
+            
+            </p>
+
+            <p > <strong>SEBASTE COMMUNITY HOSPITAL AMBULANCE NUMBER:</strong></p>
+            <p ><li>Main Ambulance:<a href="tel:0362782002">(036) 278 2002</a></li></p>
+
+            <p class="bold">HEALTH CENTERS NEAR SEBASTE COMMUNITY HOSPITAL:</p>
+            
+              <li>Poblacion Health Center: <a href="tel:09054582511">0905 458 2511</a></li>
+              <li>Sebaste Rural Health Unit: <a href="tel:0362782077">(036) 278 2077</a></li>
+              <li>Callan Barangay Health Station: <a href="tel:09177887499">09177887499</a></li>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="fade-in fade-in-delay-4">
+    <div class="footer-logo-container">
+      <img src="footer.jpg" alt="Footer Logo" />
+    </div>
+    <div class="footer-container">
+      <div class="footer-item">
+        <p class="bold">Contact Us</p>
+        <p class="bold">Sebaste Community Hospital</p>
+        <p>Address: Azucena Extension Poblacion Sebaste, Antique, Sebaste, Philippines</p>
+        <p>Phone: +63 945 136 7487</p>
+      </div>
+      <div class="footer-item">
+        <p class="bold">Sebaste Rural Health Unit</p>
+        <p>Address: H3QV+4R6, Iloilo-Antique Rd, Sebaste, Antique</p>
+        <p>Phone: (036) 278 2077</p>
+      </div>
+    </div>
+    <p class="copyright">Copyright © Municipality of Sebaste 2025 - All Rights Reserved</p>
+  </footer>
+
+      <script>
+  // Animate page title on load (if present)
+  window.addEventListener('DOMContentLoaded', () => {
+    const title = document.querySelector('.title');
+    if (title) {
+      setTimeout(() => {
+        title.classList.add('animate-up');
+      }, 200);
+    }
+  });
+
+  // Elegant fade-in animation on scroll
+  function handleScrollAnimations() {
+    const elements = document.querySelectorAll('.fade-in');
+    elements.forEach(element => {
+      const elementTop = element.getBoundingClientRect().top;
+      const elementVisible = 150;
+
+      if (elementTop < window.innerHeight - elementVisible) {
+        element.classList.add('visible');
+      }
+    });
+  }
+
+  // Scroll animation events
+  window.addEventListener('load', () => setTimeout(handleScrollAnimations, 100));
+  window.addEventListener('scroll', handleScrollAnimations);
+  window.addEventListener('resize', handleScrollAnimations);
+
+  // === Form Submission ===
+  document.querySelector('.contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const entry = {
+      firstName: form.querySelector('input[name="firstName"]').value.trim(),
+      lastName: form.querySelector('input[name="lastName"]').value.trim(),
+      contactNumber: form.querySelector('input[name="contactNumber"]').value.trim(),
+      email: form.querySelector('input[name="email"]').value.trim(),
+      inquiryType: form.querySelector('input[name="inquiryType"]').value.trim(),
+      message: form.querySelector('textarea[name="message"]').value.trim(),
+      submissionDate: new Date().toLocaleString()
+    };
+
+    // Load existing feedbacks or initialize empty array
+const existing = JSON.parse(localStorage.getItem('feedbackList')) || [];
+existing.unshift(entry); // <-- Now inserts new entry at the top
+localStorage.setItem('feedbackList', JSON.stringify(existing));
+
+    alert("Your inquiry/feedback is submitted");
+
+    form.reset();  // Reset form inputs
+  });
+</script>
+
+
+
+
+</body>
+</html>

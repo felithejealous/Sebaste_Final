@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Medical Certificate Request</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@500;600;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <link rel = "stylesheet" href = "certmed.css">
+
+</head>
+<body>
+  <div class="container">
+    <h2><i class="fas fa-file-medical"></i> Medical Certificate Request</h2>
+    
+    <div class="hospital-info">
+      <i class="fas fa-hospital"></i>
+      <div class="hospital-details">
+        <h3>Sebaste Medical Center</h3>
+        <p>123 Healthcare Avenue, Sebaste City | Phone: (123) 456-7890 | Email: contact@sebastemedical.com</p>
+      </div>
+    </div>
+    
+    <form id="medicalForm">
+      <div class="name-group">
+        <div class="form-group">
+          <label for="lastName"><i class="fas fa-user-tag"></i> Last Name</label>
+          <div class="input-with-icon">
+            <i class="fas fa-user"></i>
+            <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="firstName"><i class="fas fa-user"></i> First Name</label>
+          <div class="input-with-icon">
+            <i class="fas fa-user"></i>
+            <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="middleName"><i class="fas fa-user-circle"></i> Middle Name</label>
+        <div class="input-with-icon">
+          <i class="fas fa-user"></i>
+          <input type="text" id="middleName" name="middleName" placeholder="Enter your middle name">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="appointmentDate"><i class="fas fa-calendar-check"></i> Last Appointment Date</label>
+        <div class="input-with-icon">
+          <i class="fas fa-calendar-alt"></i>
+          <input type="date" id="appointmentDate" name="appointmentDate" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+        <div class="input-with-icon">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="contact"><i class="fas fa-phone-alt"></i> Contact Number</label>
+        <div class="input-with-icon">
+          <i class="fas fa-phone"></i>
+          <input type="tel" id="contact" name="contact" placeholder="Enter your phone number" required>
+        </div>
+      </div>
+      
+      <button type="submit" id="submitBtn">
+        <i class="fas fa-paper-plane"></i> Submit Request
+      </button>
+      
+      <div class="success-message" id="successMessage">
+        <div class="success-content">
+          <i class="fas fa-check-circle"></i>
+          <p>Your request has been submitted successfully! The admin has been notified and will review your information. Your medical certificate will be sent to your email once approved.</p>
+        </div>
+      </div>
+      
+      <div class="error-message" id="errorMessage">
+        <i class="fas fa-exclamation-triangle"></i> <span id="errorText">There was an error submitting your request. Please try again.</span>
+      </div>
+    </form>
+    
+    <div class="form-footer">
+      <p>All form responses are automatically sent to <a href="mailto:sebastecomms@gmail.com">sebastecomms@gmail.com</a></p>
+      <p>© 2023 Sebaste Medical Center. All rights reserved.</p>
+    </div>
+  </div>
+  
+  <script>
+    // Initialize EmailJS with public key
+    (function() {
+      emailjs.init("o47IzyL_vSIl3SDak"); // Public key for demonstration
+    })();
+    
+    document.getElementById('medicalForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const lastName = document.getElementById('lastName').value;
+      const firstName = document.getElementById('firstName').value;
+      const middleName = document.getElementById('middleName').value;
+      const appointmentDate = document.getElementById('appointmentDate').value;
+      const email = document.getElementById('email').value;
+      const contact = document.getElementById('contact').value;
+      
+      // Update button to show loading state
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Request...';
+      submitBtn.disabled = true;
+      
+      // Hide any previous messages
+      document.getElementById('successMessage').style.display = 'none';
+      document.getElementById('errorMessage').style.display = 'none';
+      
+      // Format the appointment date for display
+      const formattedDate = new Date(appointmentDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      
+      // Prepare the email parameters
+      const templateParams = {
+        to_email: 'sebastecomms@gmail.com',
+        from_name: 'Medical Certificate Request System',
+        patient_name: `${firstName} ${lastName}`,
+        last_name: lastName,
+        first_name: firstName,
+        middle_name: middleName,
+        appointment_date: formattedDate,
+        email: email,
+        contact: contact,
+        date_submitted: new Date().toLocaleString()
+      };
+      
+      // Send the email using EmailJS
+  emailjs.send('service_5e00ebl', 'template_hhdeu8l', templateParams)
+        .then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
+          
+          // Show success message
+          document.getElementById('successMessage').style.display = 'block';
+          
+          // Scroll to success message
+          document.getElementById('successMessage').scrollIntoView({behavior: 'smooth'});
+          
+          // Reset form after successful submission
+          document.getElementById('medicalForm').reset();
+        })
+        .catch(function(error) {
+          console.log('FAILED...', error);
+          document.getElementById('errorText').textContent = 'Error: ' + error.text || 'There was an error submitting your request.';
+          document.getElementById('errorMessage').style.display = 'block';
+        })
+        .finally(function() {
+          // Reset button to original state
+          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Request';
+          submitBtn.disabled = false;
+        });
+    });
+    
+    // Set maximum date to today for appointment date
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('appointmentDate').setAttribute('max', today);
+    
+    // Set minimum date to one year ago
+    const oneYearAgo = new Date();
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+    document.getElementById('appointmentDate').setAttribute('min', oneYearAgo.toISOString().split('T')[0]);
+  </script>
+</body>
+</html>

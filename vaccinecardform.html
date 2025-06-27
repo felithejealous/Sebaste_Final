@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vaccination Form with QR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@500;600;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="stylesheet" href="vaccinecardform.css"/>
+
+</head>
+<body>
+
+  <div class="container fade-in">
+    <div class="hospital-header">
+      <img src="logoleft.jpg" alt="Hospital Logo">
+      <div class="hospital-name">
+        <h3>Sebaste Community Hospital</h3>
+        <p>Vaccination Certificate System</p>
+      </div>
+    </div>
+    
+    <h2>COVID-19 Vaccination Form</h2>
+    <form id="vaccineForm">
+      <div class="name-group">
+        <div class="form-group">
+          <label for="lastName">Last Name *</label>
+          <input type="text" id="lastName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="firstName">First Name *</label>
+          <input type="text" id="firstName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="middleInitial">Middle Initial</label>
+          <input type="text" id="middleInitial" maxlength="1">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="birthDate">Date of Birth *</label>
+        <input type="date" id="birthDate" required >
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Gender *</label>
+        <select id="gender" required>
+          <option value="">Select Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <button type="submit">Generate Vaccination Card</button>
+    </form>
+  </div>
+
+  <!-- Vaccine Card -->
+  <div id="vaccine-card" class="fade-in">
+    <div class="hospital-header">
+      <img src="logoleft.jpg" alt="Hospital Logo">
+      <div class="hospital-name">
+        <h3>Sebaste Community Hospital</h3>
+        <p>COVID-19 Vaccination Card</p>
+      </div>
+    </div>
+    
+    <div class="card-content">
+      <div class="info-column">
+        <p><strong>Full Name:</strong> <span id="cardName"></span></p>
+        <p><strong>Address:</strong> <span id="cardAddress"></span></p>
+        <p><strong>Date of Birth:</strong> <span id="cardDOB"></span></p>
+        <p><strong>Gender:</strong> <span id="cardGender"></span></p>
+        <p><strong>Facility:</strong> <span id="cardFacility"></span></p>
+        <p><strong>Contact:</strong> <span id="cardContact"></span></p>
+      </div>
+      
+      <div class="dose-column">
+        <div id="doseContainer"></div>
+      </div>
+    </div>
+    
+   <div class="card-bottom">
+  <img id="qrCodeImage" alt="QR Code">
+  <div class="card-footer">
+    <p>Scan to verify</p>
+  </div>
+</div>
+    
+    <div class="card-buttons">
+      <button id="printBtn">Print</button>
+      <button id="downloadBtn">PDF</button>
+    </div>
+  </div>
+
+<script>
+  // Hardcoded vaccination data
+  const specialNames = {
+    "Rabago": {
+      fullName: "Rabago, Felicity B.",
+      address: "Antique, Sebaste, Philippines",
+      dob: "02/22/2005",
+      doses: [
+        { type: "1st Dose", time: "4:23 PM", date: "11/30/2021", manufacturer: "Pfizer", vaccinator: "Regina Acuna Estigoy, RHM 11" },
+        { type: "2nd Dose", time: "11:28 AM", date: "12/21/2021", manufacturer: "Pfizer", vaccinator: "Regina Acuna Estigoy, RHM 11" }
+      ],
+      facility: "Sebaste Hospital",
+      contact: "+63 945 136 7487"
+    },
+    "Nava": {
+      fullName: "Nava, Rio Angela",
+      address: "Antique, Sebaste, Philippines",
+      dob: "08/15/2005",
+      doses: [
+        { type: "1st Dose", time: "4:00 PM", date: "11/29/2021", manufacturer: "Pfizer", vaccinator: "Regina Acuna Estigoy, RHM 11" },
+        { type: "2nd Dose", time: "11:40 AM", date: "12/21/2021", manufacturer: "Pfizer", vaccinator: "Regina Acuna Estigoy, RHM 11" }
+      ],
+      facility: "Sebaste Hospital",
+      contact: "+63 945 136 7487"
+    },
+    "Mendoza": {
+      fullName: "Mendoza, Melchezedeck",
+      address: "Antique, Sebaste, Philippines",
+      dob: "10/28/2005",
+      doses: [
+        { type: "1st Dose", time: "3:00 PM", date: "11/29/2021", manufacturer: "Pfizer", vaccinator: "Regina Acuna Estigoy, RHM 11" },
+        { type: "2nd Dose", time: "10:40 AM", date: "12/21/2021", manufacturer: "Pfizer", vaccinator: "Regina Acuna Estigoy, RHM 11" }
+      ],
+      facility: "Sebaste Hospital",
+      contact: "+63 945 136 7487"
+    },
+    "Magsipoc": {
+      fullName: "Magsipoc, Allyza",
+      address: "Antique, Sebaste, Philippines",
+      dob: "11/15/2005",
+      doses: [
+        { type: "1st Dose", time: "2:00 PM", date: "11/29/2021", manufacturer: "Moderna", vaccinator: "Regina Acuna Estigoy, RHM 11" },
+        { type: "2nd Dose", time: "11:50 AM", date: "12/21/2021", manufacturer: "Moderna", vaccinator: "Regina Acuna Estigoy, RHM 11" }
+      ],
+      facility: "Sebaste Hospital",
+      contact: "+63 945 136 7487"
+    },
+    "Tapic": {
+      fullName: "Tapic, James Karlo",
+      address: "Antique, Sebaste, Philippines",
+      dob: "11/25/2005",
+      doses: [
+        { type: "1st Dose", time: "2:00 PM", date: "11/29/2021", manufacturer: "Pfizer", vaccinator: "Regina Acuna Estigoy, RHM 11" },
+        { type: "2nd Dose", time: "11:50 AM", date: "12/21/2021", manufacturer: "Pfizer", vaccinator: "Regina Acuna Estigoy, RHM 11" }
+      ],
+      facility: "Sebaste Hospital",
+      contact: "+63 945 136 7487"
+    }
+  };
+
+  // Format date as MM/DD/YYYY
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}/${date.getFullYear()}`;
+  }
+
+  // Handle form submission
+  document.getElementById('vaccineForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const lastName = document.getElementById('lastName').value.trim();
+    const firstName = document.getElementById('firstName').value.trim();
+    const middleInitial = document.getElementById('middleInitial').value.trim();
+    const dob = document.getElementById('birthDate').value;
+    const gender = document.getElementById('gender').value;
+
+    const specialData = specialNames[lastName];
+
+    // If last name is not found, show alert and stop
+    if (!specialData) {
+      alert("No records found. Try again.");
+      return;
+    }
+
+    // Check if birthday matches the hardcoded data
+    if (formatDate(dob) !== specialData.dob) {
+      alert("Birthday does not match our records. Try again.");
+      return;
+    }
+
+    // Display special data
+    document.getElementById('cardName').textContent = specialData.fullName;
+    document.getElementById('cardAddress').textContent = specialData.address;
+    document.getElementById('cardDOB').textContent = specialData.dob;
+    document.getElementById('cardGender').textContent = gender;
+    document.getElementById('cardFacility').textContent = specialData.facility;
+    document.getElementById('cardContact').textContent = specialData.contact;
+
+    // Generate dose information
+    const doseContainer = document.getElementById('doseContainer');
+    doseContainer.innerHTML = '';
+
+    specialData.doses.forEach(doseInfo => {
+      const doseDiv = document.createElement('div');
+      doseDiv.className = 'dose-info';
+      doseDiv.innerHTML = `
+        <p><strong>${doseInfo.type}:</strong></p>
+        <p>Time: ${doseInfo.time}</p>
+        <p>Date: ${doseInfo.date}</p>
+        <p>Manufacturer: ${doseInfo.manufacturer}</p>
+        <p>Vaccinator: ${doseInfo.vaccinator}</p>
+      `;
+      doseContainer.appendChild(doseDiv);
+    });
+
+    // Generate QR code
+    const qrData = `Name: ${specialData.fullName}\nDOB: ${specialData.dob}\nGender: ${gender}\nAddress: ${specialData.address}\nVaccine: ${specialData.doses[0].manufacturer}\nDoses: ${specialData.doses.length}\nFacility: ${specialData.facility}`;
+    const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(qrData) + '&size=120x120';
+    document.getElementById('qrCodeImage').src = qrUrl;
+
+    // Show the card
+    document.getElementById('vaccine-card').style.display = 'block';
+
+    // Trigger animation
+    setTimeout(() => {
+      document.getElementById('vaccine-card').classList.add('visible');
+    }, 100);
+  });
+
+  // Print button
+  document.getElementById('printBtn').addEventListener('click', function () {
+    window.print();
+  });
+
+  // Download PDF button
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    const card = document.getElementById('vaccine-card');
+    card.classList.add('hide-buttons');
+
+    html2canvas(card, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#ffffff'
+    }).then(canvas => {
+      card.classList.remove('hide-buttons');
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jspdf.jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const cardWidthMM = 106;
+      const cardHeightMM = 93;
+      const x = (pdfWidth - cardWidthMM) / 2;
+      const y = (pdfHeight - cardHeightMM) / 2;
+
+      pdf.addImage(imgData, 'PNG', x, y, cardWidthMM, cardHeightMM);
+      pdf.save('vaccination-card.pdf');
+    });
+  });
+
+  // Scroll animation
+  function handleScrollAnimations() {
+    const elements = document.querySelectorAll('.fade-in');
+    elements.forEach(element => {
+      const elementTop = element.getBoundingClientRect().top;
+      const elementVisible = 150;
+      if (elementTop < window.innerHeight - elementVisible) {
+        element.classList.add('visible');
+      }
+    });
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(handleScrollAnimations, 100);
+  });
+
+  window.addEventListener('scroll', handleScrollAnimations);
+</script>
+
+</body>
+</html>

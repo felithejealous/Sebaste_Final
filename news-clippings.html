@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <title>News Clippings - Sebaste Community Hospital</title>
+    <script src="transition.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@500;600;900&display=swap" rel="stylesheet"/>
+    <style>
+        /* Global Reset and Navbar Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            min-height: 100vh;
+            background-color: #D7EEDE;
+            display: flex; /* Added for sticky footer */
+            flex-direction: column; /* Added for sticky footer */
+        }
+
+        .navbar-container {
+            background-color: white;
+            width: 100%;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .navbar-container header {
+            height: 90px;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .hospital-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            height: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 60px;
+            overflow: hidden;
+        }
+
+        .logo-container img {
+            max-height: 79px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .hospital-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: #0B6A27;
+            text-align: left;
+            line-height: 1.2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hospital-line {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            color: #333333;
+            padding: 8px 16px;
+            border-radius: 10px;
+            transition: 0.3s ease-in-out;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            background-color: rgba(11, 106, 39, 0.2);
+        }
+
+        /* Active state for main nav links */
+        nav a.active {
+            background-color: #0B6A27;
+            color: white;
+        }
+
+        /* Styles for the dropdown */
+        .dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 220px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1001;
+            border-radius: 8px;
+            overflow: hidden;
+            top: 100%;
+            left: 0;
+            padding: 10px 0;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            font-weight: 600;
+            border-radius: 0;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #e2e2e2;
+            color: #0B6A27;
+        }
+
+        /* Active state for dropdown items */
+        .dropdown-content a.active {
+            background-color: #0B6A27; /* Dark green for active dropdown item */
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* ===== NEWS CLIPPINGS PAGE SPECIFIC STYLES ===== */
+        .page-container {
+            display: flex;
+            flex-direction: column; /* Stack children vertically: title then content box */
+            align-items: flex-start; /* Align children (title, content box) to the left */
+            max-width: 1200px; /* Max width for content area */
+            margin: 30px auto;
+            padding: 0 20px; /* Keeps overall content 20px from screen edges */
+            gap: 30px; /* Space between the title and the content box */
+            flex-grow: 1; /* Allows content to grow and push footer down */
+        }
+        
+        .page-title { /* New class for the H1 outside main-content */
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2em;
+            color: #333;
+            margin-bottom: 0; /* Gap handles spacing, so no margin here */
+            text-align: left;
+            width: 100%; /* Ensure it spans the full width of the container */
+            max-width: 1200px; /* Match max-width of other elements for consistent alignment */
+        }
+
+        .main-content {
+            width: 100%; /* Take full width within its flex parent */
+            max-width: 1200px; /* Ensure it matches the overall content width */
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* News Clippings Grid Styles */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* FORCES 3 COLUMNS */
+            gap: 20px;
+            margin-top: 0; /* Title has enough margin via page-container's gap */
+        }
+
+        .news-card {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Pushes read more to bottom */
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2em;
+            color: #333; /* Changed to green for consistency with other titles */
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .news-card .news-meta {
+            font-size: 0.85em;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .news-card .read-more {
+            display: inline-block;
+            margin-top: auto; /* Pushes the button to the bottom */
+            color: #0B6A27;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .news-card .read-more:hover {
+            color: #064b1c;
+            text-decoration: underline;
+        }
+
+        /* Pagination Styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            color: #0B6A27;
+            padding: 8px 15px;
+            border: 1px solid #D7EEDE;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pagination a.active,
+        .pagination a:hover {
+            background-color: #0B6A27;
+            color: white;
+            border-color: #0B6A27;
+        }
+
+        .pagination span {
+            color: #777;
+            padding: 8px 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0C634E;
+            color: white;
+            padding: 40px 20px 20px 20px;
+            width: 100%;
+            position: relative;
+            box-sizing: border-box;
+            margin-top: auto; /* Ensures footer is at the bottom */
+        }
+
+        .footer-logo-container {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 120px;
+            height: auto;
+            z-index: 10;
+        }
+
+        .footer-logo-container img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-left: 140px;
+        }
+
+        .footer-item {
+            flex: 1;
+            text-align: left;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .footer-item p {
+            margin: 4px 0;
+        }
+
+        .bold {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .copyright {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 11px;
+            padding-left: 140px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1366px) {
+            .navbar-container header {
+                padding: 0 20px;
+            }
+            
+            nav {
+                gap: 10px;
+            }
+            
+            nav a {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .page-container {
+                align-items: center; /* Center the title and content block on smaller screens if they don't fill width */
+            }
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            .navbar-container header {
+                padding: 0 15px;
+                flex-wrap: wrap;
+                height: auto;
+                min-height: 90px;
+            }
+
+            .hospital-container {
+                flex-wrap: wrap;
+            }
+
+            .hospital-name {
+                font-size: 18px;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            nav a {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                padding-left: 20px;
+                gap: 20px;
+            }
+
+            .footer-logo-container {
+                position: static;
+                transform: none;
+                margin-bottom: 20px;
+                width: 80px;
+            }
+
+            .copyright {
+                padding-left: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar-container header {
+                padding: 0 20px;
+            }
+            .hospital-name {
+                font-size: 18px;
+            }
+            nav {
+                gap: 10px;
+            }
+            nav a {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .page-title {
+                font-size: 1.8em;
+            }
+            .news-grid {
+                grid-template-columns: 1fr; /* Single column on very small screens */
+            }
+            .pagination a {
+                padding: 6px 10px;
+                font-size: 0.9em;
+            }
+            .navbar-container header {
+                padding: 0 10px;
+            }
+
+            .hospital-name {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar-container">
+        <header>
+            <div class="hospital-container">
+                <div class="logo-container">
+                    <img src="logoright.jpg" alt="Logo Right" />
+                </div>
+                <div class="logo-container">
+                    <img src="logoleft.jpg" alt="Logo Left" />
+                </div>
+                <div class="hospital-name">
+                    <p class="hospital-line">Sebaste Community</p>
+                    <p class="hospital-line">Hospital</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="DOCTOR.html">Find Doctors</a>
+                <a href="services.html">Our Services</a>
+                <div class="dropdown" id="newsDropdown">
+                    <a href="#" class="dropbtn">News</a>
+                    <div class="dropdown-content">
+                        <a href="news-advisories.html">Advisories</a>
+                        <a href="news-clippings.html" class="active">News Clippings</a>
+                        <a href="programs.html">Programs</a>
+                    </div>
+                </div>
+                <a href="contact.html">Contact Us</a>
+                <div class="dropdown" id="resourcesDropdown">
+                    <a href="resources.html" class="dropbtn">Resources</a>
+                    <div class="dropdown-content">
+                        <a href="downloadable.html">Downloadable Forms</a>
+                        <a href="healthtips.html">Health Educational Materials and Tips</a>
+                        <a href="events-calendar.html">Events Calendar</a>
+                     
+                    </div>
+                </div>
+                <a href="FAQs.html">FAQs</a>
+            </nav>
+        </header>
+    </div>
+
+    <div class="page-container">
+        <h1 class="page-title">News Clipping</h1>
+        <div class="main-content">
+            <div class="news-grid">
+                <div class="news-card">
+                    <h3>Experts stress vaccines in fight against dengue</h3>
+                    <p class="news-meta">By ManilaStandard.net | June 16, 2025</p>
+                    <a href="https://manilastandard.net/news/310025791/experts-stress-vaccines-in-fight-against-dengue.html" class="read-more" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>MPOX spread in check, says DoH</h3>
+                    <p class="news-meta">By ManilaStandard.net | June 15, 2025</p>
+                    <a href="https://manilastandard.net/news/310025788/mpox-spread-in-check-says-doh.html" class="read-more" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>UNAIDS, WHO support DOH's call for immediate action to combat rising HIV...</h3>
+                    <p class="news-meta">By who.com.ph | June 11, 2025</p>
+                    <a href="https://www.who.int/philippines/news/detail/11-06-2025-unaids-who-support-doh-s-call-for-immediate-action-to-combat-rising-hiv-infections-in-the-philippines" class="read-more" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>DOH renews call vs. vaping, smoking</h3>
+                    <p class="news-meta">By ManilaStandard.net | June 9, 2025</p>
+                    <a href="https://manilastandard.net/news/310025785/doh-renews-call-vs-vaping-smoking.html" class="read-more" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>Sexual contact among males main mode of HIV transmission</h3>
+                    <p class="news-meta">By ManilaStandard.net | June 5, 2025</p>
+                    <a href="https://manilastandard.net/news/310025782/sexual-contact-among-males-main-mode-of-hiv-transmission.html" class="read-more" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>HIV public emergency looms</h3>
+                    <p class="news-meta">By ManilaStandard.net | June 4, 2025</p>
+                    <a href="https://manilastandard.net/news/310025779/hiv-public-emergency-looms.html" class="read-more" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>Negros Oriental forms Mpox task force</h3>
+                    <p class="news-meta">By doh.gov.ph | June 4, 2025</p>
+                    <a href="https://doh.gov.ph/press-release/Negros-Oriental-forms-Mpox-task-force" class="read-more" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>HIV cases in Philippines may hit 480,000 without urgent action, warns DOH chief</h3>
+                    <p class="news-meta">By doh.gov.ph | June 3, 2025</p>
+                    <a href="https://doh.gov.ph/press-release/HIV-cases-in-Philippines-may-hit-480,000-without-urgent-action,-warns-DOH-chief" class="read-more" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>More provinces confirm mpox cases, no lockdown yet</h3>
+                    <p class="news-meta">By doh.gov.ph | June 2, 2025</p>
+                    <a href="https://doh.gov.ph/press-release/More-provinces-confirm-mpox-cases-no-lockdown-yet" class="read-more" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>No detection of more severe mpox strain - health group</h3>
+                    <p class="news-meta">By doh.gov.ph | June 2, 2025</p>
+                    <a href="https://doh.gov.ph/press-release/No-detection-of-more-severe-mpox-strain-health-group" class="read-more" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>Philippines sees world's fastest rise in new HIV cases, DOH calls for public...</h3>
+                    <p class="news-meta">By doh.gov.ph | June 2, 2025</p>
+                    <a href="https://doh.gov.ph/press-release/Philippines-sees-world%E2%80%99s-fastest-rise-in-new-HIV-cases-DOH-calls-for-public" class="read-more" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>DOH encourages patients to take advantage of online appointment system</h3>
+                    <p class="news-meta">By doh.gov.ph | June 1, 2025</p>
+                    <a href="https://doh.gov.ph/press-release/DOH-encourages-patients-to-take-advantage-of-online-appointment-system" class="read-more" target="_blank" rel="noopener noreferrer">Read More</a>
+                </div>
+            </div>
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="fade-in fade-in-delay-4">
+        <div class="footer-logo-container">
+            <img src="footer.jpg" alt="Footer Logo" />
+        </div>
+        <div class="footer-container">
+            <div class="footer-item">
+                <p class="bold">Contact Us</p>
+                <p class="bold">Sebaste Community Hospital</p>
+                <p>Address: Azucena Extension Poblacion Sebaste, Antique, Sebaste, Philippines</p>
+                <p>Phone: +63 945 136 7487</p>
+            </div>
+            <div class="footer-item">
+                <p class="bold">Sebaste Rural Health Unit</p>
+                <p>Address: H3QV+4R6, Iloilo-Antique Rd, Sebaste, Antique</p>
+                <p>Phone: (036) 278 2077</p>
+            </div>
+        </div>
+        <p class="copyright">Copyright © Municipality of Sebaste 2025 - All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // JavaScript to handle active navigation links (same as other pages)
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPath = window.location.pathname.split('/').pop(); 
+
+            document.querySelectorAll('nav > a').forEach(link => { 
+                const linkPath = link.href.split('/').pop();
+                if (linkPath === currentPath && linkPath !== '') { 
+                    link.classList.add('active');
+                }
+            });
+
+            document.querySelectorAll('.dropdown-content a').forEach(dropdownLink => {
+                const dropdownLinkPath = dropdownLink.href.split('/').pop();
+                
+                if (dropdownLinkPath === currentPath && dropdownLinkPath !== '') {
+                    dropdownLink.classList.add('active'); 
+                    
+                    const parentDropdown = dropdownLink.closest('.dropdown');
+                    if (parentDropdown) {
+                        const dropbtn = parentDropdown.querySelector('.dropbtn');
+                        if (dropbtn) {
+                            dropbtn.classList.add('active');
+                        }
+                    }
+                }
+            });
+        });
+
+        // Elegant fade-in animation on scroll (for footer)
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Initialize animations on page load
+        window.addEventListener('load', () => {
+            setTimeout(handleScrollAnimations, 100);
+        });
+
+        // Handle scroll animations
+        window.addEventListener('scroll', handleScrollAnimations);
+
+        // Handle resize for responsive behavior
+        window.addEventListener('resize', handleScrollAnimations);
+    </script>
+</body>
+</html>

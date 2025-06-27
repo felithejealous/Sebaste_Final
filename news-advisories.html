@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <title>Advisories - Sebaste Community Hospital</title>
+    <script src="transition.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@500;600;900&display=swap" rel="stylesheet"/>
+    <style>
+        /* Global Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            min-height: 100vh;
+            background-color: #D7EEDE; /* Your preferred background color */
+            display: flex; /* Added for sticky footer */
+            flex-direction: column; /* Added for sticky footer */
+            color: #333; /* Added for general text color */
+        }
+
+        /* ===== NAVBAR STYLES ===== */
+        .navbar-container {
+            background-color: white;
+            width: 100%;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .navbar-container header {
+            height: 90px;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .hospital-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            height: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 60px;
+            overflow: hidden;
+        }
+
+        .logo-container img {
+            max-height: 79px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .hospital-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: #0B6A27;
+            text-align: left;
+            line-height: 1.2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hospital-line {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            color: #333333;
+            padding: 8px 16px;
+            border-radius: 10px;
+            transition: 0.3s ease-in-out;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            background-color: rgba(11, 106, 39, 0.2);
+        }
+
+        /* Active state for main nav links */
+        nav a.active {
+            background-color: #0B6A27;
+            color: white;
+        }
+
+        /* Styles for the dropdown */
+        .dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 220px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1001;
+            border-radius: 8px;
+            overflow: hidden;
+            top: 100%;
+            left: 0;
+            padding: 10px 0;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            font-weight: 600;
+            border-radius: 0;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #e2e2e2;
+            color: #0B6A27;
+        }
+
+        /* Active state for dropdown items */
+        .dropdown-content a.active {
+            background-color: #0B6A27; /* Dark green for active dropdown item */
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        /* Main content container optimized for all screens */
+        .container {
+            max-width: 1200px; /* Max width for content */
+            margin: 20px auto; /* Center content with some margin */
+            padding: 0 20px;
+            flex-grow: 1; /* Allows main content to expand and push footer down */
+        }
+
+        .page-title {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 30px;
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        /* Updated Cards Grid Styles */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Default: 3 columns */
+            gap: 25px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease-in-out;
+            position: relative; /* Needed for absolute positioning of anchor */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Style for the clickable overlay */
+        .card-link {
+            text-decoration: none; /* Remove underline from the link */
+            color: inherit; /* Inherit color from parent */
+            display: block; /* Make the link take full card space */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Ensure it's above other content but below dropdowns */
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            position: relative; /* Needed for z-index context */
+            z-index: 2; /* Ensure content is above the transparent link */
+        }
+
+        .card-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .card-date {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: auto;
+        }
+
+        /* ===== FOOTER STYLES (from About Us page) ===== */
+        footer {
+            background-color: #0C634E;
+            color: white;
+            padding: 40px 20px 20px 20px;
+            width: 100%;
+            position: relative;
+            box-sizing: border-box;
+            margin-top: auto; /* Ensures footer sticks to bottom */
+        }
+
+        .footer-logo-container {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 120px;
+            height: auto;
+            z-index: 10;
+        }
+
+        .footer-logo-container img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-left: 140px;
+        }
+
+        .footer-item {
+            flex: 1;
+            text-align: left;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .footer-item p {
+            margin: 4px 0;
+        }
+
+        .bold {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .copyright {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 11px;
+            padding-left: 140px;
+        }
+
+        /* ===== ELEGANT FADE-IN ANIMATIONS (for footer) ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            filter: blur(1px);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        .fade-in-delay-1 {
+            transition-delay: 0.2s;
+        }
+
+        .fade-in-delay-2 {
+            transition-delay: 0.4s;
+        }
+
+        .fade-in-delay-3 {
+            transition-delay: 0.6s;
+        }
+
+        .fade-in-delay-4 {
+            transition-delay: 0.8s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1366px) {
+            .navbar-container header {
+                padding: 0 20px;
+            }
+            
+            nav {
+                gap: 10px;
+            }
+            
+            nav a {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-container header {
+                padding: 0 15px;
+                flex-wrap: wrap;
+                height: auto;
+                min-height: 90px;
+            }
+
+            .hospital-container {
+                flex-wrap: wrap;
+            }
+
+            .hospital-name {
+                font-size: 18px;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            nav a {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+
+            /* Adjust cards to 2 columns on tablets */
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-container {
+                flex-direction: column;
+                padding-left: 20px;
+                gap: 20px;
+            }
+
+            .footer-logo-container {
+                position: static;
+                transform: none;
+                margin-bottom: 20px;
+                width: 80px;
+            }
+
+            .copyright {
+                padding-left: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-container header {
+                padding: 0 10px;
+            }
+
+            .hospital-name {
+                font-size: 16px;
+            }
+
+            /* Adjust cards to 1 column on mobile */
+            .cards-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .footer-container {
+                flex-direction: column;
+                padding-left: 20px;
+                gap: 20px;
+            }
+
+            .footer-logo-container {
+                position: static;
+                transform: none;
+                margin-bottom: 20px;
+                width: 80px;
+            }
+
+            .copyright {
+                padding-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar-container">
+        <header>
+            <div class="hospital-container">
+                <div class="logo-container">
+                    <img src="logoright.jpg" alt="Logo Right" />
+                </div>
+                <div class="logo-container">
+                    <img src="logoleft.jpg" alt="Logo Left" />
+                </div>
+                <div class="hospital-name">
+                    <p class="hospital-line">Sebaste Community</p>
+                    <p class="hospital-line">Hospital</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="DOCTOR.html">Find Doctors</a>
+                <a href="services.html">Our Services</a>
+               <div class="dropdown" id="newsDropdown">
+                    <a href="#" class="dropbtn">News</a> 
+                    <div class="dropdown-content">
+                        <a href="news-advisories.html" class="active">Advisories</a> 
+                        <a href="news-clippings.html">News Clippings</a> 
+                        <a href="programs.html">Programs</a> 
+                       
+                    </div>
+                </div>
+                <a href="contact.html">Contact Us</a>
+                <div class="dropdown" id="resourcesDropdown">
+                    <a href="#" class="dropbtn">Resources</a>
+                    <div class="dropdown-content">
+                        <a href="downloadable.html">Downloadable Forms</a> 
+                        <a href="healthtips.html">Health Educational Materials and Tips</a> 
+                        <a href="events-calendar.html">Events Calendar</a> 
+                      
+                    </div>
+                </div>
+                <a href="FAQs.html">FAQs</a>
+            </nav>
+        </header>
+    </div>
+
+    <div class="container">
+        <h1 class="page-title">Advisory</h1>
+
+        <div class="cards-grid">
+            <div class="card">
+                <a href="denguead.html" class="card-link"></a> <img src="dengue.jpg" alt="adno1" class="card-image"> <div class="card-content">
+                    <h3 class="card-title">Advisory No. 1 : Dengue Warning and Prevention</h3>
+                    <p class="card-date">May 23, 2025</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <a href="free-consult.html" class="card-link"></a> <img src="free.jpg" alt="Continuation of Fee Consultation for Children" class="card-image"> <div class="card-content">
+                    <h3 class="card-title">Advisory No. 2 : Continuation of Free Consultation for Children</h3>
+                    <p class="card-date">April 30, 2025</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <a href="typhoon.html" class="card-link"></a> <img src="typhoon.jpg" alt="Typhoon and Calamity Preparedness" class="card-image"> <div class="card-content">
+                    <h3 class="card-title">Advisory No. 3 : Typhoon and Calamity Preparedness</h3>
+                    <p class="card-date">February 5, 2025</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <a href="measles.html" class="card-link"></a> <img src="measles.jpg" alt="Measles and Polio Vaccination Campaign" class="card-image"> <div class="card-content">
+                    <h3 class="card-title">Advisory No. 4 : Measles and Polio Vaccination Campaign</h3>
+                    <p class="card-date">May 28, 2024</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <a href="reminders.html" class="card-link"></a> <img src="reminders.jpg" alt="Reminders for Hospital Visits and Adherence to Health Protocols" class="card-image"> <div class="card-content">
+                    <h3 class="card-title">Advisory No.5 : Reminders for Hospital Visits and Adherence to Health Protocols</h3>
+                    <p class="card-date">April 8, 2024</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="fade-in fade-in-delay-4">
+        <div class="footer-logo-container">
+            <img src="footer.jpg" alt="Footer Logo" />
+        </div>
+        <div class="footer-container">
+            <div class="footer-item">
+                <p class="bold">Contact Us</p>
+                <p class="bold">Sebaste Community Hospital</p>
+                <p>Address: Azucena Extension Poblacion Sebaste, Antique, Sebaste, Philippines</p>
+                <p>Phone: +63 945 136 7487</p>
+            </div>
+            <div class="footer-item">
+                <p class="bold">Sebaste Rural Health Unit</p>
+                <p>Address: H3QV+4R6, Iloilo-Antique Rd, Sebaste, Antique</p>
+                <p>Phone: (036) 278 2077</p>
+            </div>
+        </div>
+        <p class="copyright">Copyright &copy; Municipality of Sebaste 2025 - All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // JavaScript to handle active navigation links
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPath = window.location.pathname.split('/').pop(); 
+
+            // Highlight main navigation links (direct children of nav)
+            document.querySelectorAll('nav > a').forEach(link => { 
+                const linkPath = link.href.split('/').pop();
+                if (linkPath === currentPath && linkPath !== '') { 
+                    link.classList.add('active');
+                }
+            });
+
+            // Highlight dropdown content links and their parent dropbtn
+            document.querySelectorAll('.dropdown-content a').forEach(dropdownLink => {
+                const dropdownLinkPath = dropdownLink.href.split('/').pop();
+                
+                if (dropdownLinkPath === currentPath && dropdownLinkPath !== '') {
+                    dropdownLink.classList.add('active'); 
+                    
+                    const parentDropdown = dropdownLink.closest('.dropdown');
+                    if (parentDropdown) {
+                        const dropbtn = parentDropdown.querySelector('.dropbtn');
+                        if (dropbtn) {
+                            dropbtn.classList.add('active');
+                        }
+                    }
+                }
+            });
+
+            // Run scroll animations once on DOMContentLoaded to catch elements already in view
+            handleScrollAnimations();
+        });
+
+        // Elegant fade-in animation on scroll
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                
+                // Condition to make element visible:
+                // If its top is within the viewport (or slightly below for staggered entry)
+                // AND its bottom is not completely above the viewport.
+                const elementVisibleOffset = 150; // How much of the element should be visible (from the bottom of the viewport) to trigger
+                const isVisible = (rect.top < window.innerHeight - elementVisibleOffset) && (rect.bottom >= 0);
+                
+                if (isVisible) {
+                    element.classList.add('visible');
+                } 
+                // Optional: You could add an else condition here to remove 'visible' class if element scrolls out of view
+                // else {
+                //     element.classList.remove('visible');
+                // }
+            });
+        }
+
+        // Run animations on page load, scroll, and resize
+        window.addEventListener('load', handleScrollAnimations); // Run again after all assets are loaded
+        window.addEventListener('scroll', handleScrollAnimations);
+        window.addEventListener('resize', handleScrollAnimations);
+    </script>
+
+</body>
+</html>

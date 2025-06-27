@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"/>
+    <title>Advisory No. 2: Free Consultation for Children - Sebaste Community Hospital</title>
+    <script src="transition.js"></script> 
+    <link rel = "stylesheet" href="used.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@500;600;900&display=swap" rel="stylesheet"/>
+    <style>
+        /* Global Reset and Navbar Styles - Kopyahin lang mula sa ibang pages mo */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            min-height: 100vh;
+            background-color: #D7EEDE;
+            display: flex; /* Added for sticky footer */
+            flex-direction: column; /* Added for sticky footer */
+        }
+
+    /* ===== NAVBAR STYLES ===== */
+    .navbar-container {
+      background-color: white;
+      width: 100%;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1000;
+    }
+
+    .navbar-container header {
+      height: 90px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .hospital-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      height: 100%;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 60px;
+      overflow: hidden;
+    }
+
+    .logo-container img {
+      max-height: 79px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .hospital-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #0B6A27;
+      text-align: left;
+      line-height: 1.2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hospital-line {
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      color: #333333;
+      padding: 8px 16px;
+      border-radius: 10px;
+      transition: 0.3s ease-in-out;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      background-color: rgba(11, 106, 39, 0.2);
+    }
+
+    nav a:active,
+    nav a.active {
+      background-color: #0B6A27;
+      color: white;
+    }
+
+     /* New styles for the dropdown */
+    .dropdown {
+        position: relative; /* This is crucial: makes dropdown-content position relative to this */
+        display: flex; /* Allows other nav items to flow next to it */
+        align-items: center;
+    }
+
+    .dropdown-content {
+        display: none; /* Hidden by default */
+        position: absolute; /* Positioned relative to .dropdown */
+        background-color: #f9f9f9; /* Background color for the dropdown menu */
+        min-width: 220px; /* Minimum width for the dropdown menu */
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Shadow for depth */
+        z-index: 1001; /* Ensure it's above other content, including the navbar itself if needed */
+        border-radius: 8px; /* Slightly rounded corners */
+        overflow: hidden; /* Ensures content stays within bounds */
+        top: 100%; /* Position right below the parent link */
+        left: 0; /* Align with the left edge of the parent link */
+        padding: 10px 0; /* Padding inside the dropdown */
+    }
+
+    .dropdown-content a {
+        color: #333; /* Text color for dropdown items */
+        padding: 12px 16px; /* Padding for each item */
+        text-decoration: none;
+        display: block; /* Make links take full width of dropdown */
+        text-align: left; /* Align text to the left */
+        font-weight: 600; /* Slightly less bold than main nav */
+        border-radius: 0; /* No individual border radius for dropdown items */
+    }
+
+    .dropdown-content a:hover {
+        background-color: #e2e2e2; /* Hover background for dropdown items */
+        color: #0B6A27; /* Change text color on hover */
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block; /* Show the dropdown content on hover */
+    }
+
+    /* ===== END NAVBAR STYLES ===== */
+
+        /* ===== ADVISORY PAGE SPECIFIC STYLES ===== */
+        .page-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            flex-wrap: wrap; 
+            flex-grow: 1; /* Allows content to grow and push footer down */
+        }
+
+        .main-content {
+            flex: 3; 
+            min-width: 600px; 
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-link {
+            display: inline-flex; /* Use flex for icon and text alignment */
+            align-items: center;
+            gap: 5px; /* Space between arrow and text */
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #0B6A27; /* Green color for the link */
+            font-weight: 600;
+            font-size: 1em;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .back-link:hover {
+            color: #064b1c; /* Darker green on hover */
+        }
+
+        .back-link::before {
+            content: '\2190'; /* Left arrow character */
+            font-size: 1.2em; /* Make arrow slightly larger */
+        }
+
+        .main-content h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2em;
+            color: #0B6A27;
+            margin-bottom: 15px;
+        }
+
+        .main-content .date {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 20px;
+            display: block; 
+        }
+
+        .content-image {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            border-radius: 8px;
+            margin: 0 auto 20px auto; /* Centers the image and adds bottom margin */
+            display: block;
+        }
+
+        .content-text p {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: justify; 
+        }
+        
+        .content-text ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .content-text ul li {
+            list-style-type: disc;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            color: #333;
+        }
+        
+        .content-text strong {
+            color: #0B6A27; 
+        }
+
+        .content-text a {
+            color: #0B6A27; 
+            text-decoration: underline;
+        }
+
+        .content-text a:hover {
+            text-decoration: none;
+        }
+
+        .sidebar {
+            flex: 1; 
+            min-width: 280px; 
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5em;
+            color: #0B6A27;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #D7EEDE;
+            padding-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            display: block;
+            padding: 8px 0;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .sidebar ul li a:hover {
+            color: #0B6A27;
+        }
+
+        .sidebar ul li .read-more {
+            font-size: 0.85em;
+            color: #0B6A27;
+            margin-top: 5px;
+            display: block;
+            text-decoration: none; 
+        }
+
+        .sidebar ul li .read-more:hover {
+            text-decoration: underline; 
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0C634E;
+            color: white;
+            padding: 40px 20px 20px 20px;
+            width: 100%;
+            position: relative;
+            box-sizing: border-box;
+            margin-top: auto; /* Ensures footer is at the bottom */
+        }
+
+        .footer-logo-container {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 120px;
+            height: auto;
+            z-index: 10;
+        }
+
+        .footer-logo-container img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-left: 140px;
+        }
+
+        .footer-item {
+            flex: 1;
+            text-align: left;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .footer-item p {
+            margin: 4px 0;
+        }
+
+        .bold {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .copyright {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 11px;
+            padding-left: 140px;
+        }
+        
+    /* ===== MEDIA QUERIES ===== */
+    /* For screens 1600px and larger */
+    @media (min-width: 1600px) {
+      .title {
+        font-size: 60px;
+      }
+      
+      .subtitle {
+        font-size: 24px;
+        max-width: 1100px;
+      }
+      
+      .wellness-title {
+        font-size: 60px;
+      }
+      
+      .wellness-description {
+        font-size: 24px;
+      }
+      
+      .feature-box {
+        width: 480px;
+        height: 450px;
+      }
+      
+      .feature-icon-container {
+        width: 220px;
+        height: 220px;
+      }
+      
+      .feature-title {
+        font-size: 28px;
+      }
+      
+      .card {
+        width: 240px;
+      }
+      
+      .card-image {
+        height: 260px;
+      }
+    }
+
+    /* For screens between 1366px and 1599px */
+    @media (max-width: 1599px) and (min-width: 1367px) {
+      .navbar-container header {
+        padding: 0 30px;
+      }
+      
+      nav {
+        gap: 15px;
+      }
+      
+      nav a {
+        font-size: 15px;
+        padding: 7px 14px;
+      }
+
+      .wellness-section {
+        padding: 50px 30px;
+      }
+
+      .features-container {
+        gap: 25px;
+        padding: 0 20px;
+      }
+
+      .feature-box {
+        width: 380px;
+        height: 380px;
+      }
+
+      .title {
+        font-size: 48px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+      }
+
+      .divider-container .divider {
+        height: 70px;
+      }
+
+      .footer-container-wrapper footer {
+        padding: 40px 30px 20px 30px;
+      }
+    }
+
+    /* For screens up to 1366px */
+    @media (max-width: 1366px) {
+      .navbar-container header {
+        padding: 0 20px;
+      }
+      
+      nav {
+        gap: 10px;
+      }
+      
+      nav a {
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+
+      .wellness-section {
+        padding: 40px 20px;
+      }
+
+      .features-container {
+        gap: 20px;
+        padding: 0 15px;
+      }
+
+      .feature-box {
+        width: 350px;
+        height: 350px;
+      }
+
+      .title {
+        font-size: 42px;
+      }
+
+      .subtitle {
+        font-size: 17px;
+      }
+
+      .divider-container .divider {
+        height: 70px;
+      }
+
+      .footer-container-wrapper footer {
+        padding: 30px 15px 15px 15px;
+      }
+    }
+
+    /* For screens up to 1024px */
+    @media (max-width: 1024px) {
+      .features-container {
+        gap: 20px;
+      }
+
+      .feature-box {
+        width: 300px;
+        height: 320px;
+      }
+
+      .feature-icon-container {
+        width: 150px;
+        height: 150px;
+      }
+
+      .feature-title {
+        font-size: 20px;
+      }
+
+      .wellness-title {
+        font-size: 40px;
+      }
+
+      .wellness-description {
+        font-size: 18px;
+      }
+
+      .divider-container .divider {
+        height: 60px;
+      }
+
+      .footer-container {
+        gap: 40px;
+        padding-left: 100px;
+      }
+
+      .copyright {
+        padding-left: 100px;
+      }
+    }
+
+    /* For screens up to 768px */
+    @media (max-width: 768px) {
+      .navbar-container header {
+        padding: 0 15px;
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 90px;
+      }
+
+      .hospital-container {
+        flex-wrap: wrap;
+      }
+
+      .hospital-name {
+        font-size: 18px;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      nav a {
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+
+      .title {
+        font-size: 32px;
+      }
+      
+      .subtitle {
+        font-size: 16px;
+        padding: 0 10px;
+      }
+
+      .background-container {
+        height: 450px;
+      }
+      
+      .features-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 0 20px;
+      }
+      
+      .feature-box {
+        width: 100%;
+        max-width: 350px;
+        height: 300px;
+        padding: 20px;
+      }
+
+      .feature-icon-container {
+        width: 120px;
+        height: 120px;
+      }
+
+      .feature-title {
+        font-size: 18px;
+        line-height: 22px;
+      }
+
+      .wellness-section {
+        padding: 30px 15px;
+      }
+
+      .wellness-title {
+        font-size: 28px;
+        margin-left: 0;
+      }
+
+      .wellness-description {
+        font-size: 16px;
+        margin-left: 0;
+      }
+
+      .wellness-title-container,
+      .wellness-description-container {
+        flex-direction: column;
+      }
+
+      .divider-container .divider {
+        height: 50px;
+      }
+
+      .footer-container-wrapper footer {
+        padding: 30px 15px 15px 15px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        padding-left: 20px;
+        gap: 20px;
+      }
+
+      .footer-logo-container {
+        position: static;
+        transform: none;
+        margin-bottom: 20px;
+        width: 80px;
+      }
+
+      .copyright {
+        padding-left: 20px;
+      }
+
+      .login-container {
+        max-width: 95%;
+        margin: 10px;
+        flex-direction: column;
+      }
+
+      .right-box {
+        margin: 10px;
+        height: 200px;
+      }
+
+      .row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+
+    /* For screens up to 480px */
+    @media (max-width: 480px) {
+      .navbar-container header {
+        padding: 0 10px;
+      }
+
+      .hospital-name {
+        font-size: 16px;
+      }
+
+      .title {
+        font-size: 28px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+      }
+
+      .feature-box {
+        height: 280px;
+        padding: 15px;
+      }
+
+      .feature-icon-container {
+        width: 100px;
+        height: 100px;
+      }
+
+      .feature-title {
+        font-size: 16px;
+      }
+
+      .wellness-title {
+        font-size: 24px;
+      }
+
+      .wellness-description {
+        font-size: 14px;
+      }
+
+      .action-buttons button {
+        width: 90%;
+        font-size: 16px;
+      }
+
+      .divider-container .divider {
+        height: 40px;
+      }
+
+      .footer-container-wrapper footer {
+        padding: 20px 10px 10px 10px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        padding-left: 20px;
+        gap: 20px;
+      }
+
+      .footer-logo-container {
+        position: static;
+        transform: none;
+        margin-bottom: 20px;
+        width: 80px;
+      }
+
+      .copyright {
+        padding-left: 20px;
+      }
+    }
+
+        /* Responsive Adjustments */
+        @media (max-width: 900px) {
+            .page-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .main-content, .sidebar {
+                min-width: unset; 
+                width: 100%; 
+            }
+            .main-content {
+                margin-bottom: 20px; 
+            }
+            .footer-container {
+                flex-direction: column;
+                padding-left: 20px;
+                gap: 20px;
+            }
+
+            .footer-logo-container {
+                position: static;
+                transform: none;
+                margin-bottom: 20px;
+                width: 80px;
+            }
+
+            .copyright {
+                padding-left: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar-container header {
+                padding: 0 20px;
+            }
+            .hospital-name {
+                font-size: 18px;
+            }
+            nav {
+                gap: 10px;
+            }
+            nav a {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            .page-title {
+                font-size: 2em;
+                padding-left: 0;
+                text-align: center;
+            }
+            .main-content, .sidebar {
+                padding: 20px;
+            }
+            .main-content h1 {
+                font-size: 1.8em;
+            }
+            .sidebar h2 {
+                font-size: 1.3em;
+            }
+            .back-link {
+                margin-left: 0;
+                justify-content: center; /* Center the back link on small screens */
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar-container">
+        <header>
+            <div class="hospital-container">
+                <div class="logo-container">
+                    <img src="logoright.jpg" alt="Logo Right" />
+                </div>
+                <div class="logo-container">
+                    <img src="logoleft.jpg" alt="Logo Left" />
+                </div>
+                <div class="hospital-name">
+                    <p class="hospital-line">Sebaste Community</p>
+                    <p class="hospital-line">Hospital</p>
+                </div>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="DOCTOR.html">Find Doctors</a>
+                <a href="services.html">Our Services</a>
+                <div class="dropdown" id="newsDropdown">
+                    <a href="news.html" class="dropbtn">News</a> 
+                    <div class="dropdown-content">
+                        <a href="news-advisories.html" class = "active">Advisories</a> 
+                        <a href="news-clippings.html">News Clippings</a> 
+                        <a href="programs.html">Programs</a> 
+                    
+                    </div>
+                </div>
+                <a href="contact.html">Contact Us</a>
+                <div class="dropdown" id="resourcesDropdown">
+                    <a href="resources.html" class="dropbtn">Resources</a>
+                    <div class="dropdown-content">
+                        <a href="downloadable.html">Downloadable Forms</a> 
+                        <a href="healthtips.html">Health Educational Materials and Tips</a> 
+                        <a href="events-calendar.html">Events Calendar</a> 
+                      
+                    </div>
+                </div>
+                <a href="FAQs.html">FAQs</a>
+            </nav>
+        </header>
+    </div>
+
+    <div class="page-container">
+        <div class="main-content">
+            <a href="news-advisories.html" class="back-link">Back to Advisories</a>
+            <h1>Advisory No. 2: Continuation of Free Consultation for Children</h1>
+            <p class="date">June 19, 2025</p>
+            <img src="free.jpg" alt="Free Consultation for Children" class="content-image">
+            
+            <div class="content-text">
+                <p>We are pleased to inform the community of Sebaste that free consultations for children aged 0-5 years will continue at Sebaste Community Hospital. This is in support of the health of our young ones.</p>
+
+                <p>Details:</p>
+                <ul>
+                    <li><strong>Who is qualified:</strong> All children from 0 to 5 years old.</li>
+                    <li><strong>When:</strong> Every Monday to Friday, from 8:00 AM to 5:00 PM.</li>
+                    <li><strong>Where:</strong> Pediatric Outpatient Department, Sebaste Community Hospital.</li>
+                </ul>
+                <p>Please bring a birth certificate or any proof of the child's age.</p>
+            </div>
+        </div>
+
+       <div class="sidebar">
+            <h2>Related Posts</h2>
+            <ul>
+                <li>
+                    <a href="denguead.html">Advisory No. 1: Dengue Warning and Prevention</a>
+                    <a href="denguead.html" class="read-more">Read More</a>
+                </li>
+                <li>
+                    <a href="free-consult.html" class="active">Advisory No. 2</a> 
+                    <a href="free-consult.html" class="read-more">Read More</a>
+                </li>
+                <li>
+                    <a href="typhoon.html">Advisory No. 3: Typhoon and Calamity Preparedness</a>
+                    <a href="typhoon.html" class="read-more">Read More</a>
+                </li>
+                <li>
+                    <a href="measles.html">Advisory No. 4: Measles and Polio Vaccination Campaign</a>
+                    <a href="measles.html" class="read-more">Read More</a>
+                </li>
+                    <li>
+                    <a href="reminders.html">Advisory No. 5: Reminders for Hospital Visits and Adherence to Health Protocols</a>
+                    <a href="reminders.html" class="read-more">Read More</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="fade-in fade-in-delay-4">
+        <div class="footer-logo-container">
+            <img src="footer.jpg" alt="Footer Logo" />
+        </div>
+        <div class="footer-container">
+            <div class="footer-item">
+                <p class="bold">Contact Us</p>
+                <p class="bold">Sebaste Community Hospital</p>
+                <p>Address: Azucena Extension Poblacion Sebaste, Antique, Sebaste, Philippines</p>
+                <p>Phone: +63 945 136 7487</p>
+            </div>
+            <div class="footer-item">
+                <p class="bold">Sebaste Rural Health Unit</p>
+                <p>Address: H3QV+4R6, Iloilo-Antique Rd, Sebaste, Antique</p>
+                <p>Phone: (036) 278 2077</p>
+            </div>
+        </div>
+        <p class="copyright">Copyright © Municipality of Sebaste 2025 - All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // JavaScript to handle active navigation links (same as other pages)
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPath = window.location.pathname.split('/').pop(); 
+
+            // Highlight main nav links
+            document.querySelectorAll('nav > a').forEach(link => { 
+                const linkPath = link.href.split('/').pop();
+                if (linkPath === currentPath && linkPath !== '') { 
+                    link.classList.add('active');
+                }
+            });
+
+            // Highlight dropdown links and their parent dropbtn
+            document.querySelectorAll('.dropdown-content a').forEach(dropdownLink => {
+                const dropdownLinkPath = dropdownLink.href.split('/').pop();
+                
+                if (dropdownLinkPath === currentPath && dropdownLinkPath !== '') {
+                    dropdownLink.classList.add('active'); 
+                    
+                    const parentDropdown = dropdownLink.closest('.dropdown');
+                    if (parentDropdown) {
+                        const dropbtn = parentDropdown.querySelector('.dropbtn');
+                        if (dropbtn) {
+                            dropbtn.classList.add('active');
+                        }
+                    }
+                }
+            });
+        });
+
+        // Elegant fade-in animation on scroll (for footer)
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Initialize animations on page load
+        window.addEventListener('load', () => {
+            setTimeout(handleScrollAnimations, 100);
+        });
+
+        // Handle scroll animations
+        window.addEventListener('scroll', handleScrollAnimations);
+
+        // Handle resize for responsive behavior
+        window.addEventListener('resize', handleScrollAnimations);
+    </script>
+</body>
+</html>
