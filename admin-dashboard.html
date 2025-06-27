@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Sebaste Community Hospital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@500;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles-admin\dash-admin.css">
+    <link rel="stylesheet" href="styles-admin\base-admin.css">
+    <link rel="stylesheet" href="styles-admin\cards.css">
+    <link rel="stylesheet" href="styles-admin\events-admin.css">
+    <link rel="stylesheet" href="styles-admin\nav-admin.css">
+    <link rel="stylesheet" href="styles-admin\news-table-admin.css">
+    <link rel="stylesheet" href="styles-admin\newsclippings-table-admin.css">
+    <link rel="stylesheet" href="styles-admin\programs-table-admin.css">
+    <link rel="stylesheet" href="styles-admin\responsiveness.css">
+    <link rel="stylesheet" href="styles-admin\sidebar-admin.css">
+    <link rel="stylesheet" href="styles-admin\stable-tables-admin.css">
+    <link rel="stylesheet" href="styles-admin\dashcards.css">
+
+
+<style>
+    .dashboard-container {
+    display: flex;
+    margin-top: 90px;
+    min-height: calc(100vh - 90px);
+    width: 100%;
+}
+
+/* Main content area - Adjusted for proper alignment */
+.main-content {
+    flex: 1;
+    padding: 30px 30px 30px 0; /* Right padding only */
+    margin-left: 150px;
+    transition: margin-left 0.3s ease;
+    width: calc(100% - 150px); /* Account for sidebar */
+}
+
+.dashboard-header {
+    margin-bottom: 30px;
+    padding-left: 160px; /* Use padding instead of margin for consistent spacing */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dashboard-header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+    margin-left: 0; /* Removed extra margin */
+    width: 100%;
+}
+
+/* Cards container - Aligned with header */
+.dashboard-summary-cards {
+    padding-left: 90px; /* Match header padding */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 30px;
+    }
+    
+    .dashboard-header,
+    .dashboard-summary-cards {
+        padding-left: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 20px;
+    }
+    
+    .dashboard-header,
+    .dashboard-summary-cards {
+        padding-left: 20px;
+    }
+    
+    .dashboard-header h1 {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+    <!--NAV BAR-->
+    <div class="navbar-container">
+        <header>
+            <div class="hospital-container">
+                <div class="logo-group">
+                    <img src="logoright.jpg" alt="Sebaste Hospital Right Logo" id="logoRight" />
+                    <img src="logoleft.jpg" alt="Sebaste Hospital Left Logo" id="logoLeft" />
+                </div>
+                <div class="hospital-name">
+                    <p class="hospital-line">Sebaste Community</p>
+                    <p class="hospital-line">Hospital</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">A</div>
+                <div class="user-name">Admin <span class="admin-badge">Admin</span></div>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </header>
+    </div>
+
+
+    <!--contents container-->
+    <div class="dashboard-container">
+    
+    <!--admin sidebar-->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="admin-dashboard.html" class="active">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 41 42" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                                <path d="M3.20312 21.9844V3.28125H15.6953V21.9844H3.20312Z" fill="currentColor" />
+                                <path d="M25.3047 10.1719V3.28125H37.7969V10.1719H25.3047Z" fill="currentColor" />
+                                <path d="M25.3047 38.7188V20.0156H37.7969V38.7188H25.3047Z" fill="currentColor" />
+                                <path d="M3.20312 38.7188V31.8281H15.6953V38.7188H3.20312Z" fill="currentColor" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M22.1016 1.3125C22.1016 0.587626 22.6752 0 23.3828 0H39.7187C40.4264 0 41 0.587627 41 1.3125V12.1406C41 12.8655 40.4264 13.4531 39.7187 13.4531H23.3828C22.6752 13.4531 22.1016 12.8655 22.1016 12.1406V1.3125ZM25.3047 3.28125V10.1719H37.7969V3.28125H25.3047ZM22.1016 18.0469C22.1016 17.322 22.6752 16.7344 23.3828 16.7344H39.7187C40.4264 16.7344 41 17.322 41 18.0469V40.6875C41 41.4124 40.4264 42 39.7187 42H23.3828C22.6752 42 22.1016 41.4124 22.1016 40.6875V18.0469ZM25.3047 20.0156V38.7188H37.7969V20.0156H25.3047Z" fill="currentColor" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6172 0H1.28125C0.573635 0 0 0.587626 0 1.3125V23.9531C0 24.678 0.573635 25.2656 1.28125 25.2656H17.6172C18.3248 25.2656 18.8984 24.678 18.8984 23.9531V1.3125C18.8984 0.587627 18.3248 0 17.6172 0ZM3.20312 3.28125V21.9844H15.6953V3.28125H3.20312Z" fill="currentColor" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6172 28.5469H1.28125C0.573635 28.5469 0 29.1345 0 29.8594V40.6875C0 41.4124 0.573635 42 1.28125 42H17.6172C18.3248 42 18.8984 41.4124 18.8984 40.6875V29.8594C18.8984 29.1345 18.3248 28.5469 17.6172 28.5469ZM3.20312 31.8281V38.7188H15.6953V31.8281H3.20312Z" fill="currentColor" />
+                            </svg>
+                        </span>
+                        <span class="menu-text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-staff.html" >
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                                <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13M16 3.13C16.8604 3.3503 17.623 3.8507 18.1676 4.55231C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <span class="menu-text">Staff</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-events.html" >
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                                <path d="M4 8H20M4 8V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V8M4 8V6C4 4.89543 4.89543 4 6 4H18C19.1046 4 20 4.89543 20 6V8M9 11H15M9 15H15" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <span class="menu-text">Event Management</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-news.html" >
+                        <span class="icon">
+                            <i class="far fa-newspaper"></i>
+                        </span>
+                        <span class="menu-text">News Management</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-newsClippings.html" >
+                        <span class="icon">
+                            <i class="fas fa-file-alt"></i>
+                        </span>
+                        <span class="menu-text">News Clippings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-programs.html" >
+                        <span class="icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </span>
+                        <span class="menu-text">Programs</span>
+                    </a>
+                </li>
+                <li>
+                <a href="admin-Feedback and Inquiry.html" >
+                    <span class="icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 4H20V16H6L4 18V4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    </svg>
+                    </span>
+                    <span class="menu-text">Feedback and Inquiry</span>
+                </a>
+                </li>
+                <li>
+                    <a href="admin-settings.html" >
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 50 51" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                                <path d="M18.3526 50.9167L17.3859 42.7834C16.8623 42.5716 16.3689 42.3174 15.9057 42.0209C15.4425 41.7243 14.9894 41.4066 14.5464 41.0678L7.35677 44.2448L0.710938 32.1719L6.93385 27.2157C6.89358 26.9191 6.87344 26.6332 6.87344 26.3579V24.6422C6.87344 24.3669 6.89358 24.0809 6.93385 23.7844L0.710938 18.8282L7.35677 6.75525L14.5464 9.93233C14.9894 9.59344 15.4526 9.27574 15.9359 8.97921C16.4193 8.68268 16.9026 8.42851 17.3859 8.21671L18.3526 0.083374H31.6443L32.6109 8.21671C33.1345 8.42851 33.628 8.68268 34.0911 8.97921C34.5543 9.27574 35.0075 9.59344 35.4505 9.93233L42.6401 6.75525L49.2859 18.8282L43.063 23.7844C43.1033 24.0809 43.1234 24.3669 43.1234 24.6422V26.3579C43.1234 26.6332 43.0832 26.9191 43.0026 27.2157L49.2255 32.1719L42.5797 44.2448L35.4505 41.0678C35.0075 41.4066 34.5443 41.7243 34.0609 42.0209C33.5776 42.3174 33.0943 42.5716 32.6109 42.7834L31.6443 50.9167H18.3526ZM25.1193 34.3959C27.4554 34.3959 29.4491 33.5275 31.1005 31.7907C32.7519 30.0539 33.5776 27.957 33.5776 25.5C33.5776 23.0431 32.7519 20.9462 31.1005 19.2094C29.4491 17.4726 27.4554 16.6042 25.1193 16.6042C22.7429 16.6042 20.7391 17.4726 19.1078 19.2094C17.4766 20.9462 16.6609 23.0431 16.6609 25.5C16.6609 27.957 17.4766 30.0539 19.1078 31.7907C20.7391 33.5275 22.7429 34.3959 25.1193 34.3959Z" fill="currentColor" />
+                            </svg>
+                        </span>
+                        <span class="menu-text">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+    
+
+    <main class="main-content" id="mainContent"> <div class="dashboard-header">
+                <h1>Admin Dashboard</h1> <p class="welcome-message">Welcome back! Here's an overview of your hospital operations.</p>
+            </div>
+            <div class="main-content">
+            <div class="container">
+                <div class="dashboard-summary-cards">
+                <div class="summary-card">
+                    <div class="card-icon">
+                    <i class="fas fa-calendar-plus"></i>
+                    </div>
+                    <div class="card-content">
+                    <span class="card-title">Total Events</span>
+                    <span class="card-value" id="totalEventsCount">0</span>
+                    <span class="card-description">Currently managed</span>
+                    <a href="admin-events.html" class="card-link">View all events &rarr;</a>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-icon"><i class="fas fa-bullhorn"></i></div> <div class="card-content">
+                        <span class="card-title">Total News Articles</span>
+                        <span class="card-value" id="totalNewsCount">0</span>
+                        <span class="card-description">Published articles</span>
+                        <a href="admin-news.html" class="card-link">View all news &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="card-icon"><i class="fas fa-link"></i></div> <div class="card-content">
+                        <span class="card-title">Total News Clippings</span>
+                        <span class="card-value" id="totalNewsClippingsCount">0</span>
+                        <span class="card-description">External links</span>
+                        <a href="admin-newsClippings.html" class="card-link">View all clippings &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <div class="card-icon"><i class="fas fa-hospital"></i></div> <div class="card-content">
+                        <span class="card-title">Total Programs</span>
+                        <span class="card-value" id="totalProgramsCount">0</span>
+                        <span class="card-description">Active hospital programs</span>
+                        <a href="admin-programs.html" class="card-link">View all programs &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+    <script>
+        // --- Helper Functions (Include your actual implementations here if they are more complex) ---
+        function showErrorMessage(message, section) {
+            const errorToast = document.getElementById('errorMessage');
+            if (errorToast) { // Check if element exists
+                errorToast.textContent = message;
+                errorToast.classList.add('show', 'error-toast');
+                setTimeout(() => {
+                    errorToast.classList.remove('show');
+                }, 3000);
+            }
+            console.error(`Error (${section}): ${message}`);
+        }
+
+        function showSuccessMessage(message, section) {
+            const successToast = document.getElementById('successMessage');
+            if (successToast) { // Check if element exists
+                successToast.textContent = message;
+                successToast.classList.add('show', 'success-toast');
+                setTimeout(() => {
+                    successToast.classList.remove('show');
+                }, 3000);
+            }
+            console.log(`Success (${section}): ${message}`);
+        }
+
+        function showLoading(message) {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const loadingMessage = document.getElementById('loadingMessage');
+            if (loadingOverlay && loadingMessage) {
+                loadingMessage.textContent = message;
+                loadingOverlay.style.display = 'flex';
+                return loadingOverlay;
+            }
+            return null;
+        }
+
+        function hideLoading(loadingElement) {
+            if (loadingElement) {
+                loadingElement.style.display = 'none';
+            }
+        }
+        
+        function truncateText(text, maxLength) {
+            if (text && text.length > maxLength) {
+                return text.substring(0, maxLength) + '...';
+            }
+            return text;
+        }
+
+        // --- Data Retrieval Functions (These should already be in your script.js or included here) ---
+        function getEvents() {
+            try {
+                return JSON.parse(localStorage.getItem('hospitalEvents')) || [];
+            } catch (e) {
+                console.error("Error parsing hospitalEvents from localStorage:", e);
+                return [];
+            }
+        }
+
+    
+function getNews() {
+    try {
+        const news = JSON.parse(localStorage.getItem('hospitalNews')) || [];
+        return Array.isArray(news) ? news : []; // Ensure it's always an array
+    } catch (e) {
+        console.error("Error parsing hospitalNews from localStorage:", e);
+        return [];
+    }
+}
+
+//event listener to watch for storage changes
+
+window.addEventListener('storage', function(event) {
+    if (event.key === 'hospitalNews') {
+        updateDashboardCounts();
+        loadRecentActivity();
+    }
+});
+
+        function getNewsClippings() {
+            try {
+                return JSON.parse(localStorage.getItem('hospitalNewsClippings')) || [];
+            } catch (e) {
+                console.error("Error parsing hospitalNewsClippings from localStorage:", e);
+                return [];
+            }
+        }
+
+        function getPrograms() {
+            try {
+                return JSON.parse(localStorage.getItem('hospitalPrograms')) || [];
+            } catch (e) {
+                console.error("Error parsing hospitalPrograms from localStorage:", e);
+                return [];
+            }
+        }
+        
+        // --- Common Delete Confirmation Logic (If you have this, keep your version) ---
+        // For dashboard, these are primarily for the modal HTML to function.
+        let currentDeleteItemType = null;
+        let currentDeleteIndex = null;
+
+        function showDeleteConfirm(type, index) {
+            currentDeleteItemType = type;
+            currentDeleteIndex = index;
+            let itemTitle = "this item"; // Default
+            try {
+                if (type === 'event') {
+                    const events = getEvents();
+                    if (events[index]) itemTitle = events[index].title;
+                } else if (type === 'news') {
+                    const news = getNews();
+                    if (news[index]) itemTitle = news[index].title;
+                } else if (type === 'newsClipping') {
+                    const clippings = getNewsClippings();
+                    if (clippings[index]) itemTitle = clippings[index].title;
+                } else if (type === 'program') {
+                    const programs = getPrograms();
+                    if (programs[index]) itemTitle = programs[index].title;
+                }
+            } catch (e) {
+                console.error("Error getting item title for delete confirmation:", e);
+            }
+            const deleteConfirmText = document.getElementById('deleteConfirmText');
+            if (deleteConfirmText) {
+                 deleteConfirmText.textContent = `Are you sure you want to delete "${truncateText(itemTitle, 50)}"? This action cannot be undone.`;
+            }
+           
+            const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+            if (deleteConfirmModal) {
+                deleteConfirmModal.style.display = 'flex';
+            }
+        }
+
+        function closeDeleteConfirm() {
+            const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+            if (deleteConfirmModal) {
+                deleteConfirmModal.style.display = 'none';
+            }
+            currentDeleteItemType = null;
+            currentDeleteIndex = null;
+        }
+
+        // --- Dashboard Specific Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+            const closeDeleteModal = document.getElementById('closeDeleteModal');
+            const cancelDelete = document.getElementById('cancelDelete');
+            const confirmDelete = document.getElementById('confirmDelete');
+
+
+            // Function to update dashboard counts
+            function updateDashboardCounts() {
+                const totalEventsCount = document.getElementById('totalEventsCount');
+                const totalNewsCount = document.getElementById('totalNewsCount');
+                const totalNewsClippingsCount = document.getElementById('totalNewsClippingsCount');
+                const totalProgramsCount = document.getElementById('totalProgramsCount');
+
+                // Check if elements exist before updating
+                if (totalEventsCount) totalEventsCount.textContent = getEvents().length;
+                if (totalNewsCount) totalNewsCount.textContent = getNews().length;
+                if (totalNewsClippingsCount) totalNewsClippingsCount.textContent = getNewsClippings().length;
+                if (totalProgramsCount) totalProgramsCount.textContent = getPrograms().length;
+            }
+
+            // Function to load recent activities
+            function loadRecentActivity() {
+                const recentActivityList = document.getElementById('recentActivityList');
+                let activities = [];
+
+                const events = getEvents();
+                const news = getNews();
+                const newsClippings = getNewsClippings();
+                const programs = getPrograms();
+
+                events.forEach(event => {
+                    const eventDate = new Date(event.date);
+                    if (!isNaN(eventDate)) {
+                        activities.push({
+                            text: `New Event Scheduled: ${truncateText(event.title, 40)}`,
+                            date: event.date,
+                            icon: 'fas fa-calendar-check',
+                            timestamp: eventDate.getTime()
+                        });
+                    }
+                });
+
+                news.forEach(article => {
+                    const articleDate = new Date(article.date);
+                     if (!isNaN(articleDate)) {
+                        activities.push({
+                            text: `New News Article Published: ${truncateText(article.title, 40)}`,
+                            date: article.date,
+                            icon: 'fas fa-bullhorn',
+                            timestamp: articleDate.getTime()
+                        });
+                    }
+                });
+
+                newsClippings.forEach(clipping => {
+                    const clippingDate = new Date(clipping.date);
+                    if (!isNaN(clippingDate)) {
+                        activities.push({
+                            text: `New News Clipping Added: ${truncateText(clipping.title, 40)}`,
+                            date: clipping.date,
+                            icon: 'fas fa-link',
+                            timestamp: clippingDate.getTime()
+                        });
+                    }
+                });
+
+                programs.forEach(program => {
+                    activities.push({
+                        text: `New Program Added: ${truncateText(program.title, 40)}`,
+                        date: 'Recently added', // Placeholder
+                        icon: 'fas fa-clinic-medical',
+                        timestamp: Date.now() // Use current time for newly added items or a default
+                    });
+                });
+
+                // Sort all activities by timestamp in descending order (newest first)
+                activities.sort((a, b) => b.timestamp - a.timestamp);
+
+                if (recentActivityList) { // Check if element exists
+                    recentActivityList.innerHTML = '';
+                    const displayLimit = 7; // Display up to 7 recent activities
+                    const activitiesToDisplay = activities.slice(0, displayLimit);
+
+                    if (activitiesToDisplay.length === 0) {
+                        recentActivityList.innerHTML = `<li class="activity-item"><span class="activity-text">No recent activity.</span></li>`;
+                    } else {
+                        activitiesToDisplay.forEach(activity => {
+                            const li = document.createElement('li');
+                            li.className = 'activity-item';
+                            // Format date nicely
+                            const displayDate = activity.date === 'Recently added' ? 'Recently added' : new Date(activity.timestamp).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+                            li.innerHTML = `
+                                <span class="activity-icon"><i class="${activity.icon}"></i></span>
+                                <span class="activity-text">${activity.text}</span>
+                                <span class="activity-date">${displayDate}</span>
+                            `;
+                            recentActivityList.appendChild(li);
+                        });
+                    }
+                }
+            }
+
+            // Initial calls when the dashboard page loads
+            updateDashboardCounts();
+            loadRecentActivity();
+
+            // --- Event Listeners ---
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', () => {
+                    if (sidebar) sidebar.classList.toggle('active');
+                });
+            }
+
+            // Event listeners for delete confirmation modal (if present and used)
+            if (closeDeleteModal) closeDeleteModal.addEventListener('click', closeDeleteConfirm);
+            if (cancelDelete) cancelDelete.addEventListener('click', closeDeleteConfirm);
+            if (confirmDelete) confirmDelete.addEventListener('click', function() {
+                closeDeleteConfirm();
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Clippings - Sebaste Community Hospital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@500;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="styles-admin/dash-admin.css">
+    <link rel="stylesheet" href="styles-admin/base-admin.css">
+    <link rel="stylesheet" href="styles-admin/cards.css">
+    <link rel="stylesheet" href="styles-admin/events-admin.css">
+    <link rel="stylesheet" href="styles-admin/modal.css">
+    <link rel="stylesheet" href="styles-admin/nav-admin.css">
+    <link rel="stylesheet" href="styles-admin/news-table-admin.css">
+    <link rel="stylesheet" href="styles-admin/newsclippings-table-admin.css">
+    <link rel="stylesheet" href="styles-admin/programs-table-admin.css">
+    <link rel="stylesheet" href="styles-admin/responsiveness.css">
+    <link rel="stylesheet" href="styles-admin/sidebar-admin.css">
+    <link rel="stylesheet" href="styles-admin/stable-tables-admin.css">
+    <link rel="stylesheet" href="styles-admin/tables-admin.css">
+    <link rel="stylesheet" href="styles-admin/admin-events.css">
+    
+    <style>
+        /* Image handling styles */
+        .image-preview-container {
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            max-height: 150px;
+            margin-top: 10px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .thumbnail-img {
+            max-width: 100px;
+            max-height: 60px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .file-input-label {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #0B6A27;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .file-input-label:hover {
+            background-color: #084f1f;
+        }
+        
+        #fileInput {
+            display: none;
+        }
+        
+        /* Table adjustments */
+        .events-table th, 
+        .events-table td {
+            vertical-align: middle;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+      
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 20px;
+    }
+
+    .modal-content {
+        background: white;
+        margin: auto;
+        padding: 25px;
+        border-radius: 8px;
+        width: 500px;
+        max-width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        animation: fadeInScale 0.3s ease-out;
+        position: relative;
+    }
+
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.95) translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    </style>
+</head>
+
+<body>
+    <!-- NAV BAR -->
+    <div class="navbar-container">
+        <header>
+            <div class="hospital-container">
+                <div class="logo-group">
+                    <img src="logoright.jpg" alt="Hospital Right Logo" id="logoRight" />
+                    <img src="logoleft.jpg" alt="Hospital Left Logo" id="logoLeft" />
+                </div>
+                <div class="hospital-name">
+                    <p class="hospital-line">Sebaste Community</p>
+                    <p class="hospital-line">Hospital</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">A</div>
+                <div class="user-name">Admin <span class="admin-badge">Admin</span></div>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </header>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-container">
+        <!-- Admin Sidebar -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="admin-dashboard.html" class="nav-link">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 41 42" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                                <path d="M3.20312 21.9844V3.28125H15.6953V21.9844H3.20312Z" fill="currentColor" />
+                                <path d="M25.3047 10.1719V3.28125H37.7969V10.1719H25.3047Z" fill="currentColor" />
+                                <path d="M25.3047 38.7188V20.0156H37.7969V38.7188H25.3047Z" fill="currentColor" />
+                                <path d="M3.20312 38.7188V31.8281H15.6953V38.7188H3.20312Z" fill="currentColor" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M22.1016 1.3125C22.1016 0.587626 22.6752 0 23.3828 0H39.7187C40.4264 0 41 0.587627 41 1.3125V12.1406C41 12.8655 40.4264 13.4531 39.7187 13.4531H23.3828C22.6752 13.4531 22.1016 12.8655 22.1016 12.1406V1.3125ZM25.3047 3.28125V10.1719H37.7969V3.28125H25.3047ZM22.1016 18.0469C22.1016 17.322 22.6752 16.7344 23.3828 16.7344H39.7187C40.4264 16.7344 41 17.322 41 18.0469V40.6875C41 41.4124 40.4264 42 39.7187 42H23.3828C22.6752 42 22.1016 41.4124 22.1016 40.6875V18.0469ZM25.3047 20.0156V38.7188H37.7969V20.0156H25.3047Z" fill="currentColor" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6172 0H1.28125C0.573635 0 0 0.587626 0 1.3125V23.9531C0 24.678 0.573635 25.2656 1.28125 25.2656H17.6172C18.3248 25.2656 18.8984 24.678 18.8984 23.9531V1.3125C18.8984 0.587627 18.3248 0 17.6172 0ZM3.20312 3.28125V21.9844H15.6953V3.28125H3.20312Z" fill="currentColor" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.6172 28.5469H1.28125C0.573635 28.5469 0 29.1345 0 29.8594V40.6875C0 41.4124 0.573635 42 1.28125 42H17.6172C18.3248 42 18.8984 41.4124 18.8984 40.6875V29.8594C18.8984 29.1345 18.3248 28.5469 17.6172 28.5469ZM3.20312 31.8281V38.7188H15.6953V31.8281H3.20312Z" fill="currentColor" />
+                            </svg>
+                        </span>
+                        <span class="menu-text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-staff.html" class="nav-link">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                                <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13M16 3.13C16.8604 3.3503 17.623 3.8507 18.1676 4.55231C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <span class="menu-text">Staff</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-events.html" class="nav-link">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                                <path d="M4 8H20M4 8V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V8M4 8V6C4 4.89543 4.89543 4 6 4H18C19.1046 4 20 4.89543 20 6V8M9 11H15M9 15H15" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <span class="menu-text">Event Management</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-news.html" class="nav-link">
+                        <span class="icon">
+                            <i class="far fa-newspaper"></i>
+                        </span>
+                        <span class="menu-text">News Management</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-newsClippings.html" class="nav-link">
+                        <span class="icon">
+                            <i class="fas fa-file-alt"></i>
+                        </span>
+                        <span class="menu-text">News Clippings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-programs.html" class="nav-link active">
+                        <span class="icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </span>
+                        <span class="menu-text">Programs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-Feedback and Inquiry.html" class="nav-link">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H20V16H6L4 18V4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <span class="menu-text">Feedback and Inquiry</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-settings.html" class="nav-link">
+                        <span class="icon">
+                            <svg width="24" height="24" viewBox="0 0 50 51" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                                <path d="M18.3526 50.9167L17.3859 42.7834C16.8623 42.5716 16.3689 42.3174 15.9057 42.0209C15.4425 41.7243 14.9894 41.4066 14.5464 41.0678L7.35677 44.2448L0.710938 32.1719L6.93385 27.2157C6.89358 26.9191 6.87344 26.6332 6.87344 26.3579V24.6422C6.87344 24.3669 6.89358 24.0809 6.93385 23.7844L0.710938 18.8282L7.35677 6.75525L14.5464 9.93233C14.9894 9.59344 15.4526 9.27574 15.9359 8.97921C16.4193 8.68268 16.9026 8.42851 17.3859 8.21671L18.3526 0.083374H31.6443L32.6109 8.21671C33.1345 8.42851 33.628 8.68268 34.0911 8.97921C34.5543 9.27574 35.0075 9.59344 35.4505 9.93233L42.6401 6.75525L49.2859 18.8282L43.063 23.7844C43.1033 24.0809 43.1234 24.3669 43.1234 24.6422V26.3579C43.1234 26.6332 43.0832 26.9191 43.0026 27.2157L49.2255 32.1719L42.5797 44.2448L35.4505 41.0678C35.0075 41.4066 34.5443 41.7243 34.0609 42.0209C33.5776 42.3174 33.0943 42.5716 32.6109 42.7834L31.6443 50.9167H18.3526ZM25.1193 34.3959C27.4554 34.3959 29.4491 33.5275 31.1005 31.7907C32.7519 30.0539 33.5776 27.957 33.5776 25.5C33.5776 23.0431 32.7519 20.9462 31.1005 19.2094C29.4491 17.4726 27.4554 16.6042 25.1193 16.6042C22.7429 16.6042 20.7391 17.4726 19.1078 19.2094C17.4766 20.9462 16.6609 23.0431 16.6609 25.5C16.6609 27.957 17.4766 30.0539 19.1078 31.7907C20.7391 33.5275 22.7429 34.3959 25.1193 34.3959Z" fill="currentColor" />
+                            </svg>
+                        </span>
+                        <span class="menu-text">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <h1 class="event-management-header">Program Management</h1>
+
+            <div id="adminPanel" class="admin-panel">
+                <div class="manage-events-card">
+                    <h2 class="section-title">
+                        <i class="fas fa-file-alt"></i> Manage Programs
+                    </h2>
+
+                    <div class="success-message" id="successMessage"></div>
+                    <div class="error-message" id="errorMessage"></div>
+
+                    <div class="form-actions" style="justify-content: space-between; margin-bottom: 20px;">
+                        <div class="form-group" style="margin-bottom: 0; flex: 1; max-width: 300px;">
+                            <input type="text" id="searchEvents" placeholder="Search programs..." class="search-input">
+                        </div>
+                        <button class="btn btn-success" id="addEventBtn">
+                            <i class="fas fa-plus"></i> Add Programs
+                        </button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="events-table" id="eventsTable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 15%;">Image</th>
+                                    <th style="width: 15%;">Program No.</th>
+                                    <th style="width: 20%;">Title</th>
+                                    <th style="width: 15%;">Date</th>
+                                    <th style="width: 20%;">Description</th>
+                                    <th style="width: 15%;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="eventsTableBody">
+                                <!-- Programs items will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Programs Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Program</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <form id="eventForm">
+                <input type="hidden" id="eventId">
+                <div class="form-group">
+                    <label for="modalEventTitle">Title *</label>
+                    <input type="text" id="modalEventTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="modalEventDate">Publication Date *</label>
+                    <input type="date" id="modalEventDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="modalEventSource">Source (Newspaper/Website) *</label>
+                    <input type="text" id="modalEventSource" required>
+                </div>
+                <div class="form-group">
+                    <label for="modalEventDesc">Summary *</label>
+                    <textarea id="modalEventDesc" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Image *</label>
+                    <label for="fileInput" class="file-input-label">
+                        <i class="fas fa-upload"></i> Choose Image
+                    </label>
+                    <input type="file" id="fileInput" accept="image/*">
+                    <div class="image-preview-container">
+                        <img id="imagePreview" class="image-preview" src="#" alt="Image Preview">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelModal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Program</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteConfirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirm Deletion</h3>
+                <button class="modal-close" id="closeDeleteModal">&times;</button>
+            </div>
+            <div class="form-group">
+                <p>Are you sure you want to delete this program? This action cannot be undone.</p>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="cancelDelete">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Sebaste Community Hospital. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const eventsTableBody = document.getElementById('eventsTableBody');
+            const addEventBtn = document.getElementById('addEventBtn');
+            const eventModal = document.getElementById('eventModal');
+            const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+            const closeModal = document.getElementById('closeModal');
+            const closeDeleteModal = document.getElementById('closeDeleteModal');
+            const cancelModal = document.getElementById('cancelModal');
+            const cancelDelete = document.getElementById('cancelDelete');
+            const confirmDelete = document.getElementById('confirmDelete');
+            const eventForm = document.getElementById('eventForm');
+            const searchEvents = document.getElementById('searchEvents');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const fileInput = document.getElementById('fileInput');
+            const imagePreviewContainer = document.querySelector('.image-preview-container');
+            const imagePreview = document.getElementById('imagePreview');
+
+            // Variables
+            let programsData = [];
+            let currentEventId = null;
+            let currentImageFile = null;
+
+            // Initialize the page
+            init();
+
+            function init() {
+                loadProgramsData();
+                setupEventListeners();
+            }
+
+            function saveProgramsData(data) {
+                try {
+                    localStorage.setItem('hospitalPrograms', JSON.stringify(data));
+                    console.log('Programs data saved:', data);
+                    
+                    // Trigger custom event for dashboard update
+                    window.dispatchEvent(new CustomEvent('programsDataUpdated', {
+                        detail: { count: data.length }
+                    }));
+                    
+                    // Also trigger storage event for cross-tab communication
+                    window.dispatchEvent(new StorageEvent('storage', {
+                        key: 'hospitalPrograms',
+                        newValue: JSON.stringify(data),
+                        oldValue: localStorage.getItem('hospitalPrograms')
+                    }));
+                } catch (e) {
+                    console.error('Error saving programs data:', e);
+                    showErrorMessage('Failed to save programs data');
+                }
+            }
+
+            function loadProgramsData() {
+                try {
+                    const storedData = localStorage.getItem('hospitalPrograms');
+                    programsData = storedData ? JSON.parse(storedData) : [];
+                    console.log('Loaded programs data:', programsData);
+                    renderProgramsTable(programsData);
+                } catch (e) {
+                    console.error("Error loading programs data:", e);
+                    programsData = [];
+                    renderProgramsTable(programsData);
+                }
+            }
+
+            function renderProgramsTable(data) {
+                eventsTableBody.innerHTML = '';
+                
+                if (data.length === 0) {
+                    eventsTableBody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="no-data">No programs found</td>
+                        </tr>
+                    `;
+                    return;
+                }
+                
+                data.forEach(program => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><img src="${program.image || 'https://via.placeholder.com/150'}" alt="${program.title}" class="thumbnail-img" onerror="this.src='https://via.placeholder.com/150'"></td>
+                        <td>${program.id}</td>
+                        <td>${program.title}</td>
+                        <td>${formatDate(program.date)}</td>
+                        <td>${truncateText(program.summary, 50)}</td>
+                        <td class="action-buttons">
+                            <button class="btn btn-edit" onclick="handleEdit(${program.id})">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn btn-danger" onclick="handleDelete(${program.id})">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </td>
+                    `;
+                    eventsTableBody.appendChild(row);
+                });
+            }
+
+            function formatDate(dateString) {
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                return new Date(dateString).toLocaleDateString(undefined, options);
+            }
+
+            function truncateText(text, maxLength) {
+                if (!text) return '';
+                if (text.length <= maxLength) return text;
+                return text.substring(0, maxLength) + '...';
+            }
+
+            function setupEventListeners() {
+                // Modal controls
+                if (addEventBtn) addEventBtn.addEventListener('click', () => openModal('add'));
+                if (closeModal) closeModal.addEventListener('click', closeEventModal);
+                if (cancelModal) cancelModal.addEventListener('click', closeEventModal);
+                if (closeDeleteModal) closeDeleteModal.addEventListener('click', closeDeleteModalFunc);
+                if (cancelDelete) cancelDelete.addEventListener('click', closeDeleteModalFunc);
+                
+                // Form submission
+                if (eventForm) eventForm.addEventListener('submit', handleFormSubmit);
+                
+                // Search functionality
+                if (searchEvents) searchEvents.addEventListener('input', handleSearch);
+                
+                // File input
+                if (fileInput) fileInput.addEventListener('change', handleFileSelect);
+                
+                // Confirm delete
+                if (confirmDelete) confirmDelete.addEventListener('click', confirmDeleteEvent);
+
+                // Close modals when clicking outside
+                if (eventModal) {
+                    eventModal.addEventListener('click', function(e) {
+                        if (e.target === eventModal) {
+                            closeEventModal();
+                        }
+                    });
+                }
+
+                if (deleteConfirmModal) {
+                    deleteConfirmModal.addEventListener('click', function(e) {
+                        if (e.target === deleteConfirmModal) {
+                            closeDeleteModalFunc();
+                        }
+                    });
+                }
+            }
+
+            // Make functions global so they can be called from onclick handlers
+            window.handleEdit = function(eventId) {
+                console.log('Edit clicked for ID:', eventId);
+                openModal('edit', eventId);
+            };
+
+            window.handleDelete = function(eventId) {
+                console.log('Delete clicked for ID:', eventId);
+                currentEventId = eventId;
+                if (deleteConfirmModal) {
+                    deleteConfirmModal.style.display = 'block';
+                }
+            };
+
+            function openModal(mode, eventId = null) {
+                currentEventId = eventId;
+                
+                if (mode === 'add') {
+                    document.getElementById('modalTitle').textContent = 'Add Program';
+                    eventForm.reset();
+                    if (imagePreviewContainer) imagePreviewContainer.style.display = 'none';
+                    currentImageFile = null;
+                } else if (mode === 'edit') {
+                    document.getElementById('modalTitle').textContent = 'Edit Program';
+                    const programItem = programsData.find(item => item.id === eventId);
+                    
+                    if (programItem) {
+                        document.getElementById('eventId').value = programItem.id;
+                        document.getElementById('modalEventTitle').value = programItem.title;
+                        document.getElementById('modalEventDate').value = programItem.date;
+                        document.getElementById('modalEventSource').value = programItem.source;
+                        document.getElementById('modalEventDesc').value = programItem.summary;
+                        
+                        // Set image preview
+                        if (programItem.image && imagePreview && imagePreviewContainer) {
+                            imagePreview.src = programItem.image;
+                            imagePreviewContainer.style.display = 'block';
+                        }
+                        currentImageFile = null;
+                    }
+                }
+                
+                if (eventModal) eventModal.style.display = 'block';
+            }
+
+            function closeEventModal() {
+                if (eventModal) eventModal.style.display = 'none';
+                currentEventId = null;
+                currentImageFile = null;
+            }
+
+            function closeDeleteModalFunc() {
+                if (deleteConfirmModal) deleteConfirmModal.style.display = 'none';
+                currentEventId = null;
+            }
+
+            function confirmDeleteEvent() {
+                console.log('Confirming delete for ID:', currentEventId);
+                
+                if (currentEventId !== null) {
+                    // Find the item to delete
+                    const itemToDelete = programsData.find(item => item.id === currentEventId);
+                    console.log('Item to delete:', itemToDelete);
+                    
+                    // Filter out the item
+                    const originalLength = programsData.length;
+                    programsData = programsData.filter(item => item.id !== currentEventId);
+                    
+                    console.log('Original length:', originalLength, 'New length:', programsData.length);
+                    
+                    if (programsData.length < originalLength) {
+                        // Save updated data
+                        saveProgramsData(programsData);
+                        
+                        // Re-render table
+                        renderProgramsTable(programsData);
+                        
+                        // Show success message
+                        showSuccessMessage('Program deleted successfully');
+                        
+                        console.log('Program deleted successfully');
+                    } else {
+                        showErrorMessage('Failed to delete program');
+                        console.error('Failed to delete program');
+                    }
+                    
+                    // Close modal
+                    closeDeleteModalFunc();
+                }
+            }
+
+            function handleFormSubmit(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const title = document.getElementById('modalEventTitle').value.trim();
+                const date = document.getElementById('modalEventDate').value;
+                const source = document.getElementById('modalEventSource').value.trim();
+                const summary = document.getElementById('modalEventDesc').value.trim();
+                
+                // Validate form
+                if (!title || !date || !source || !summary) {
+                    showErrorMessage('Please fill in all required fields');
+                    return;
+                }
+
+                // Handle image - convert to base64 for persistence
+                let imageUrl = 'https://via.placeholder.com/150';
+                
+                if (currentImageFile) {
+                    // Convert file to base64
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imageUrl = e.target.result;
+                        saveProgramItem(imageUrl);
+                    };
+                    reader.readAsDataURL(currentImageFile);
+                    return;
+                } else if (imagePreview && imagePreview.src && !imagePreview.src.includes('placeholder')) {
+                    // Keep existing image
+                    imageUrl = imagePreview.src;
+                }
+                
+                saveProgramItem(imageUrl);
+            }
+
+            function saveProgramItem(imageUrl) {
+                const title = document.getElementById('modalEventTitle').value.trim();
+                const date = document.getElementById('modalEventDate').value;
+                const source = document.getElementById('modalEventSource').value.trim();
+                const summary = document.getElementById('modalEventDesc').value.trim();
+
+                // Create program object
+                const programItem = {
+                    title,
+                    date,
+                    source,
+                    summary,
+                    image: imageUrl
+                };
+                
+                if (currentEventId) {
+                    // Edit existing program
+                    const index = programsData.findIndex(item => item.id === currentEventId);
+                    if (index !== -1) {
+                        programsData[index] = { ...programsData[index], ...programItem };
+                        showSuccessMessage('Program updated successfully');
+                    }
+                } else {
+                    // Add new program
+                    const newId = programsData.length > 0 ? Math.max(...programsData.map(item => item.id)) + 1 : 1;
+                    programsData.push({ id: newId, ...programItem });
+                    showSuccessMessage('Program added successfully');
+                }
+                
+                saveProgramsData(programsData);
+                renderProgramsTable(programsData);
+                closeEventModal();
+            }
+
+            function handleSearch() {
+                const searchTerm = searchEvents.value.toLowerCase();
+                
+                if (!searchTerm) {
+                    renderProgramsTable(programsData);
+                    return;
+                }
+                
+                const filteredData = programsData.filter(program => 
+                    program.title.toLowerCase().includes(searchTerm) ||
+                    program.source.toLowerCase().includes(searchTerm) ||
+                    program.summary.toLowerCase().includes(searchTerm) ||
+                    program.date.includes(searchTerm)
+                );
+                
+                renderProgramsTable(filteredData);
+            }
+
+            function handleFileSelect(e) {
+                const file = e.target.files[0];
+                
+                if (file) {
+                    if (!file.type.match('image.*')) {
+                        showErrorMessage('Please select an image file');
+                        return;
+                    }
+                    
+                    // Check file size (limit to 5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        showErrorMessage('Image file size should be less than 5MB');
+                        return;
+                    }
+                    
+                    currentImageFile = file;
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        if (imagePreview && imagePreviewContainer) {
+                            imagePreview.src = event.target.result;
+                            imagePreviewContainer.style.display = 'block';
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            function showSuccessMessage(message) {
+                if (successMessage) {
+                    successMessage.textContent = message;
+                    successMessage.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 3000);
+                }
+            }
+
+            function showErrorMessage(message) {
+                if (errorMessage) {
+                    errorMessage.textContent = message;
+                    errorMessage.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        errorMessage.style.display = 'none';
+                    }, 3000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
