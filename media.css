@@ -1,0 +1,237 @@
+@media (max-width: 1024px) {
+      .features-container {
+        gap: 20px;
+      }
+
+      .feature-box {
+        width: 300px;
+        height: 320px;
+      }
+
+      .feature-icon-container {
+        width: 150px;
+        height: 150px;
+      }
+
+      .feature-title {
+        font-size: 20px;
+      }
+
+      .wellness-title {
+        font-size: 40px;
+      }
+
+      .wellness-description {
+        font-size: 18px;
+      }
+
+      .divider-container .divider {
+        height: 60px;
+      }
+
+      .footer-container {
+        gap: 40px;
+        padding-left: 100px;
+      }
+
+      .copyright {
+        padding-left: 100px;
+      }
+    }
+
+    /* For screens up to 768px */
+    @media (max-width: 768px) {
+      .navbar-container header {
+        padding: 0 15px;
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 90px;
+      }
+
+      .hospital-container {
+        flex-wrap: wrap;
+      }
+
+      .hospital-name {
+        font-size: 18px;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      nav a {
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+
+      .title {
+        font-size: 32px;
+      }
+      
+      .subtitle {
+        font-size: 16px;
+        padding: 0 10px;
+      }
+
+      .background-container {
+        height: 450px;
+      }
+      
+      .features-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 0 20px;
+      }
+      
+      .feature-box {
+        width: 100%;
+        max-width: 350px;
+        height: 300px;
+        padding: 20px;
+      }
+
+      .feature-icon-container {
+        width: 120px;
+        height: 120px;
+      }
+
+      .feature-title {
+        font-size: 18px;
+        line-height: 22px;
+      }
+
+      .wellness-section {
+        padding: 30px 15px;
+      }
+
+      .wellness-title {
+        font-size: 28px;
+        margin-left: 0;
+      }
+
+      .wellness-description {
+        font-size: 16px;
+        margin-left: 0;
+      }
+
+      .wellness-title-container,
+      .wellness-description-container {
+        flex-direction: column;
+      }
+
+      .divider-container .divider {
+        height: 50px;
+      }
+
+      .footer-container-wrapper footer {
+        padding: 30px 15px 15px 15px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        padding-left: 20px;
+        gap: 20px;
+      }
+
+      .footer-logo-container {
+        position: static;
+        transform: none;
+        margin-bottom: 20px;
+        width: 80px;
+      }
+
+      .copyright {
+        padding-left: 20px;
+      }
+
+      .login-container {
+        max-width: 95%;
+        margin: 10px;
+        flex-direction: column;
+      }
+
+      .right-box {
+        margin: 10px;
+        height: 200px;
+      }
+
+      .row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+
+    /* For screens up to 480px */
+    @media (max-width: 480px) {
+      .navbar-container header {
+        padding: 0 10px;
+      }
+
+      .hospital-name {
+        font-size: 16px;
+      }
+
+      .title {
+        font-size: 28px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+      }
+
+      .feature-box {
+        height: 280px;
+        padding: 15px;
+      }
+
+      .feature-icon-container {
+        width: 100px;
+        height: 100px;
+      }
+
+      .feature-title {
+        font-size: 16px;
+      }
+
+      .wellness-title {
+        font-size: 24px;
+      }
+
+      .wellness-description {
+        font-size: 14px;
+      }
+
+      .action-buttons button {
+        width: 90%;
+        font-size: 16px;
+      }
+
+      .divider-container .divider {
+        height: 40px;
+      }
+
+      .footer-container-wrapper footer {
+        padding: 20px 10px 10px 10px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        padding-left: 20px;
+        gap: 20px;
+      }
+
+      .footer-logo-container {
+        position: static;
+        transform: none;
+        margin-bottom: 20px;
+        width: 80px;
+      }
+
+      .copyright {
+        padding-left: 20px;
+      }
+    }

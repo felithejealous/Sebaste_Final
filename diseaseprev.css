@@ -1,0 +1,727 @@
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-color: #D7EEDE;
+      color: #333;
+    }
+
+    /* ===== NAVBAR STYLES ===== */
+    .navbar-container {
+      background-color: white;
+      width: 100%;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1000;
+    }
+
+    .navbar-container header {
+      height: 90px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .hospital-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      height: 100%;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 60px;
+      overflow: hidden;
+    }
+
+    .logo-container img {
+      max-height: 79px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .hospital-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #0B6A27;
+      text-align: left;
+      line-height: 1.2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hospital-line {
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      color: #333333;
+      padding: 8px 16px;
+      border-radius: 10px;
+      transition: 0.3s ease-in-out;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      background-color: rgba(11, 106, 39, 0.2);
+    }
+
+    nav a:active,
+    nav a.active {
+      background-color: #0B6A27;
+      color: white;
+    }
+
+    /* ===== DROPDOWN STYLES ===== */
+    .dropdown {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 220px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1001;
+        border-radius: 8px;
+        overflow: hidden;
+        top: 100%;
+        left: 0;
+        padding: 10px 0;
+    }
+
+    .dropdown-content a {
+        color: #333;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        font-weight: 600;
+        border-radius: 0;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #e2e2e2;
+        color: #0B6A27;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    
+    .dropdown-content a.active {
+        background-color: #0B6A27;
+        color: white;
+    }
+
+    /* ===== HERO SECTION ===== */
+
+    .main-content {
+      position: relative;
+      z-index: 10;
+      padding: 0 20px;
+    }
+
+    .title {
+      font-family: 'Poppins', sans-serif;
+      color: #000000;
+      font-weight: 900;
+      font-size: 50px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .title.animate-up {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== HEALTH TIPS SECTION ===== */
+    .health-section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #D7EEDE;
+    }
+    
+    .health-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .health-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 42px;
+      font-weight: 900;
+      color: #0B6A27;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .health-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: #0C634E;
+      border-radius: 2px;
+    }
+    
+    .health-subtitle {
+      font-size: 18px;
+      color: #555;
+      max-width: 700px;
+      margin: 20px auto 0;
+      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    /* Disease Prevention Content */
+    .prevention-content {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+      margin-bottom: 60px;
+    }
+    
+    .prevention-header {
+      background: linear-gradient(135deg, #0C634E 0%, #5D988A 100%);
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .prevention-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    .prevention-header > * {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .prevention-icon {
+      font-size: 64px;
+      color: white;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .prevention-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: white;
+      margin: 0;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    
+    .prevention-body {
+      padding: 40px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .prevention-description {
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 25px;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .prevention-section {
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px dashed #d7eede;
+    }
+    
+    .prevention-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .prevention-section h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .prevention-section h3 i {
+      font-size: 28px;
+    }
+    
+    .prevention-section ul {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .prevention-section li {
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+ 
+    
+    .prevention-section strong {
+      color: #0B6A27;
+    }
+    
+    .prevention-quote {
+      text-align: center;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 18px;
+      color: #0C634E;
+      margin: 40px 0;
+      padding: 20px;
+      border-left: 4px solid #0B6A27;
+      background-color: rgba(11, 106, 39, 0.05);
+      border-radius: 0 8px 8px 0;
+    }
+    
+.prevention-image {
+  width: 100%;
+  max-width: 1000px; /* Limits the maximum width */
+  border-radius: 12px;
+  margin: 20px 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.prevention-image2{
+      width: 100%;
+  
+  max-width: 1000px; /* Limits the maximum width */
+  border-radius: 12px;
+  margin: 20px 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0B6A27 0%, #0C634E 100%);
+      color: white;
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+      width: fit-content;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 4px 12px rgba(11, 106, 39, 0.3);
+    }
+    
+    .read-more i {
+      margin-right: 10px;
+      transition: transform 0.3s ease;
+    }
+    
+    .read-more:hover {
+      background: linear-gradient(135deg, #094c1d 0%, #0a5240 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(11, 106, 39, 0.4);
+    }
+    
+    .read-more:hover i {
+      transform: translateX(5px);
+    }
+
+    /* ===== ELEGANT FADE-IN ANIMATIONS ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      filter: blur(1px);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    .fade-in-delay-1 {
+      transition-delay: 0.2s;
+    }
+
+    .fade-in-delay-2 {
+      transition-delay: 0.4s;
+    }
+
+    .fade-in-delay-3 {
+      transition-delay: 0.6s;
+    }
+
+    .fade-in-delay-4 {
+      transition-delay: 0.8s;
+    }
+    
+    .fade-in-delay-5 { transition-delay: 1.0s; }
+    .fade-in-delay-6 { transition-delay: 1.2s; }
+    .fade-in-delay-7 { transition-delay: 1.4s; }
+    .fade-in-delay-8 { transition-delay: 1.6s; }
+
+    .handwashing-color { color: #2980b9; }
+    .vaccination-color { color: #27ae60; }
+    .seasonal-color { color: #f39c12; }
+    .travel-color { color: #8e44ad; }
+
+    /* Footer */
+    footer {
+      background-color: #0C634E;
+      color: white;
+      padding: 40px 20px 20px 20px;
+      width: 100%;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .footer-logo-container {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 120px;
+      height: auto;
+      z-index: 10;
+    }
+
+    .footer-logo-container img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 60px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-left: 140px;
+    }
+
+    .footer-item {
+      flex: 1;
+      text-align: left;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .footer-item p {
+      margin: 4px 0;
+    }
+
+    .bold {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .copyright {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 11px;
+      padding-left: 140px;
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+    
+    .menu-toggle span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background-color: #333;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 1366px) {
+      .navbar-container header {
+        padding: 0 20px;
+      }
+      
+      nav {
+        gap: 10px;
+      }
+      
+      nav a {
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .health-title {
+        font-size: 36px;
+      }
+
+      .title {
+        font-size: 40px;
+      }
+
+      .background-container {
+        height: 400px;
+      }
+      
+      .video-title {
+        font-size: 32px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+      
+      nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding: 10px 0;
+        gap: 5px;
+      }
+      
+      nav.active {
+        display: flex;
+      }
+      
+      .dropdown {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .navbar-container header {
+        padding: 0 15px;
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 90px;
+      }
+
+      .hospital-container {
+        flex-wrap: wrap;
+      }
+
+      .hospital-name {
+        font-size: 18px;
+      }
+
+      .title {
+        font-size: 32px;
+      }
+
+      .background-container {
+        height: 350px;
+      }
+
+      .health-header {
+        margin-bottom: 30px;
+      }
+      
+      .health-title {
+        font-size: 32px;
+      }
+      
+      .health-subtitle {
+        font-size: 16px;
+      }
+      
+      .prevention-header {
+        padding: 30px 15px;
+      }
+      
+      .prevention-icon {
+        font-size: 48px;
+      }
+      
+      .prevention-title {
+        font-size: 28px;
+      }
+      
+      .prevention-body {
+        padding: 25px;
+      }
+      
+      .prevention-section h3 {
+        font-size: 20px;
+      }
+      
+      .read-more {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+      
+      /* Dropdown adjustments */
+      .dropdown-content {
+        position: static;
+        display: none;
+        width: 100%;
+        box-shadow: none;
+        padding: 0;
+        margin-top: 10px;
+      }
+      
+      .dropdown:hover .dropdown-content,
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
+      
+      .dropdown-content a {
+        padding: 8px 15px;
+        border-radius: 0;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        padding-left: 20px;
+        gap: 20px;
+      }
+
+      .footer-logo-container {
+        position: static;
+        transform: none;
+        margin-bottom: 20px;
+        width: 80px;
+      }
+
+      .copyright {
+        padding-left: 20px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .health-title {
+        font-size: 28px;
+      }
+
+      .title {
+        font-size: 28px;
+      }
+
+      .background-container {
+        height: 300px;
+      }
+      
+      .video-title {
+        font-size: 28px;
+      }
+      
+      .prevention-title {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar-container header {
+        padding: 0 10px;
+      }
+
+      .hospital-name {
+        font-size: 16px;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+      
+      .prevention-body {
+        padding: 20px 15px;
+      }
+      
+      .prevention-section h3 {
+        font-size: 18px;
+      }
+      
+      .prevention-section h3 i {
+        font-size: 24px;
+      }
+      
+      .prevention-quote {
+        font-size: 16px;
+        padding: 15px;
+      }
+    }

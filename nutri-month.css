@@ -1,0 +1,143 @@
+/* Container with two columns - slightly larger width */
+.container {
+  max-width: 1200px; /* Wider total width */
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  gap: 10px;
+  padding: 0 20px;
+}
+
+/* LEFT SIDEBAR */
+.container aside {
+  flex: 1;
+  min-width: 220px;
+  background-color: #fff;
+  padding: 20px 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  height: fit-content;
+}
+
+.container aside h2 {
+  color: #0B6A27;
+  font-size: 1.6em;
+  margin-bottom: 20px;
+}
+
+.container aside > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.container aside .card {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fdfdfd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.container aside .card:hover {
+  transform: translateX(4px);
+}
+
+.container aside .card .card-image {
+  height: 120px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.container aside .card .card-content {
+  padding: 10px 12px;
+}
+
+.container aside .card .card-title {
+  font-size: 1em;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.container aside .card .card-date {
+  font-size: 0.8em;
+  color: #666;
+}
+
+/* MAIN ARTICLE */
+.container article {
+  flex: 5; /* Wider compared to sidebar */
+}
+
+.back-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0B6A27;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-bottom: 25px;
+}
+
+.back-button:hover {
+  background-color: #095821;
+}
+
+.news-article {
+  background-color: #fff;
+  padding: 35px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.news-article img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+.news-article h1 {
+  font-size: 2.2em;
+  color: #0B6A27;
+  margin-bottom: 20px;
+}
+
+.news-article p {
+  font-size: 1.1em;
+  color: #333;
+  line-height: 1.9;
+}
+
+/* Optional responsive tweak */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .container article,
+  .container aside {
+    min-width: 100%;
+  }
+
+  .news-article {
+    padding: 25px;
+  }
+}
+
+.news-article ul {
+  margin-left: 20px;
+  padding-left: 20px;
+  list-style-type: disc; /* You can change to 'circle' or 'square' if preferred */
+  color: #333;
+  font-size: 1em;
+  line-height: 1.8;
+}
+
+.news-article ul li {
+  margin-bottom: 8px;
+}
